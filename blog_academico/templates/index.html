@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Blog Académico{% endblock %}
+
+{% block content %}
+  <h1 class="text-center mb-4">Últimos Artículos</h1>
+
+  <div class="row">
+    {% for articulo in articulos %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          {% if articulo.imagen %}
+            <img src="{{ articulo.imagen.url }}" class="card-img-top" alt="{{ articulo.titulo }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ articulo.titulo }}</h5>
+            <p class="card-text">{{ articulo.contenido|truncatewords:20 }}</p>
+            <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}" class="btn btn-primary">Leer más</a>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Publicado el {{ articulo.fecha_publicacion|date:"d/m/Y" }} en <a href="{% url 'blog_edicion:articulos_por_categoria' pk=articulo.categoria.pk %}">{{ articulo.categoria.nombre }}</a></small>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No hay artículos para mostrar.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

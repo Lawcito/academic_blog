@@ -1,0 +1,99 @@
+:root{
+  --bg: #041a4b;        /* fondo superior */
+  --panel: #0b1220;     /* panel oscuro de contenido */
+  --text: #e5e7eb;      /* texto claro */
+}
+
+/* Altura base */
+html, body { height: 100%; }
+
+/* Fondo global y color de texto por defecto */
+body{
+  background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
+  color: var(--text);
+}
+
+/* === Superficies === */
+.bg-surface{              /* la usás en <body class="bg-surface"> */
+  background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
+  color: var(--text);
+}
+
+/* Panel central (donde va {% block content %}) */
+.bg-panel{
+  background: var(--panel);
+  color: #e5e7eb;
+  /* bordes y radio (si el template los necesita) */
+  /* border: 1px solid #334155; */
+  /* border-radius: 1rem; */
+}
+.bg-panel h1,
+.bg-panel h2,
+.bg-panel p,
+.bg-panel .lead{
+  color: #e5e7eb;
+}
+
+/* Footer */
+.bg-footer{
+  background: #111827; /* gris muy oscuro */
+  color: #e5e7eb;
+}
+
+/* Contraste de botón info en fondo oscuro (Bootstrap) */
+.btn-info{
+  --bs-btn-bg: #06b6d4;
+  --bs-btn-border-color: #06b6d4;
+  --bs-btn-hover-bg: #22d3ee;
+  --bs-btn-hover-border-color: #22d3ee;
+}
+
+/* Mejorar outline de btn-outline-light en fondo oscuro */
+.btn-outline-light{
+  --bs-btn-color: #e5e7eb;
+  --bs-btn-border-color: #e5e7eb;
+  --bs-btn-hover-color: #0b1220;
+  --bs-btn-hover-bg: #e5e7eb;
+  --bs-btn-hover-border-color: #e5e7eb;
+}
+
+/* Navbar toggler visible en fondo oscuro */
+.navbar-dark .navbar-toggler-icon{
+  filter: invert(1) grayscale(1);
+}
+
+/* Navegación responsive: en mobile, que los botones ocupen todo el ancho y se apilen */
+.navbar-nav .btn{
+  width: 100%;
+}
+@media (min-width: 992px){ /* lg en Bootstrap */
+  .navbar-nav{
+    gap: .5rem;
+    align-items: center;
+  }
+  .navbar-nav .btn{
+    width: auto; /* en desktop vuelven a su tamaño natural */
+  }
+}
+
+/* Tablas responsivas (que nunca "tapen" contenido) */
+.table-responsive{
+  position: relative;
+  overflow-x: auto;
+}
+
+/* Links de accesibilidad (skip link) visibles al enfocar con teclado */
+.visually-hidden-focusable:focus{
+  left: 12px !important;
+  top: 12px !important;
+  position: fixed !important;
+  z-index: 1000;
+}
+
+/* Detalles de tipografía y utilidades */
+a.link-light:visited{ color: #cbd5e1; }
+.text-secondary{ color: #cbd5e1 !important; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
