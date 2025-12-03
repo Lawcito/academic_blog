@@ -5,7 +5,7 @@
 {% block content %}
   <article>
     <h1>{{ articulo.titulo }}</h1>
-    <p class="text-muted">
+    <p class="text-black">
       Publicado el {{ articulo.fecha_publicacion|date:"d/m/Y" }}
       {% if articulo.autor %} por {{ articulo.autor.username }}{% endif %}
       en <a href="{% url 'blog_edicion:articulos_por_categoria' articulo.categoria.pk %}">{{ articulo.categoria.nombre }}</a>
