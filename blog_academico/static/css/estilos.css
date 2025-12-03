@@ -36,7 +36,7 @@ body{
 
 /* Footer */
 .bg-footer{
-  background: #111827; /* gris muy oscuro */
+  background: #0446d4; /* gris muy oscuro */
   color: #e5e7eb;
 }
 
@@ -60,6 +60,12 @@ body{
 /* Navbar toggler visible en fondo oscuro */
 .navbar-dark .navbar-toggler-icon{
   filter: invert(1) grayscale(1);
+}
+
+/* Estilos de los formularios */
+form .form-control {
+    background-color: #92acd3 !important;
+    color: white !important;
 }
 
 /* Navegación responsive: en mobile, que los botones ocupen todo el ancho y se apilen */
@@ -97,3 +103,4 @@ a.link-light:visited{ color: #cbd5e1; }
 @media (prefers-reduced-motion: reduce){
   *{ animation: none !important; transition: none !important; }
 }
+
