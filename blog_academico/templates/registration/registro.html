@@ -1,10 +1,70 @@
+{# templates/registration/register.html #}
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
 
 {% block content %}
-  <h2>Registro de Usuario</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrarse</button>
-  </form>
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h1 class="auth-title">Registro de Usuario</h1>
+        <p class="auth-subtitle">
+            Unite al <strong>Blog Universitario</strong> y compartí tus ideas, apuntes y experiencias.
+        </p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            {# Errores generales del formulario #}
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {# Campos del formulario #}
+            {% for field in form %}
+                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text|safe }}</small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <div class="error-msg">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-primary">Registrarme</button>
+        </form>
+
+        <p class="auth-alt">
+            ¿Ya tenés cuenta?
+            <a href="{% url 'login' %}" class="btn-secondary">Iniciá sesión</a>
+        </p>
+    </div>
+
+    <aside class="auth-aside">
+        <div class="auth-aside-content">
+            <h2>Comunidad universitaria</h2>
+            <p>Publicá artículos, resúmenes y experiencias de cursada.</p>
+            <ul>
+                <li>Apuntes de materias</li>
+                <li>Material de estudio</li>
+                <li>Debates con tus compañeros</li>
+            </ul>
+            <p class="aside-footer">
+                <span class="badge">Blog Universitario</span>
+            </p>
+        </div>
+    </aside>
+</div>
 {% endblock %}
