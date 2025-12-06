@@ -1,9 +1,6 @@
-/* ---------- DEBUG TEMPORAL ----------
-   (para verificar que auth.css se carga) 
-body { background: yellow !important; } 
---------------------------------------- */
 
-/* Google Fonts */
+
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap');
 
 /* Fuente general */
@@ -13,8 +10,8 @@ body {
 
 /* Paleta */
 :root {
-    --bg-main: #0f172a;
-    --bg-card: #0b1120;
+    --bg-main: #0838a9;
+    --bg-card: #1443bb;
     --accent: #3b82f6;
     --accent-soft: #1d4ed8;
     --text-main: #e5e7eb;
@@ -35,10 +32,10 @@ body {
 
 /* Tarjeta */
 .auth-card {
-    background: rgba(15, 23, 42, 0.92);
+    background: rgba(14, 60, 167, 0.92);
     border-radius: 1.25rem;
     padding: 2.5rem 2rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    border: 1px solid rgb(225, 226, 227);
     color: var(--text-main);
 }
 
@@ -79,7 +76,7 @@ body {
     font-size: 0.95rem !important;
 }
 
-/* Botón – ROJO/BORDÓ (tu pedido) */
+
 /* Botón de la barra de navegación: estilo azul marino uniforme */
 .navbar .btn-primary {
     background: linear-gradient(135deg, var(--accent-soft), var(--bg-main)) !important;
@@ -114,7 +111,7 @@ body {
 }
 
 .auth-aside-content {
-    background: rgba(15, 23, 42, 0.75);
+    background: rgba(8, 59, 179, 0.75);
     border-radius: 1.5rem;
     padding: 2rem;
     color: var(--text-main);
@@ -131,18 +128,24 @@ body {
 .auth-form .btn-primary {
     margin-bottom: 1rem !important;  /* espacio con "¿Ya tenés cuenta? Iniciá sesión" */
 }
-/* === BOTÓN "Registrarse" DEL NAVBAR EN AZUL MARINO === */
+
+
 .navbar .btn-registrarse {
-    background: var(--bg-main) !important;       /* azul marino principal */
-    color: #fff !important;
+    background: var(--bg-main) !important;     
+    color: rgb(208, 202, 202) !important;
     border-radius: 999px !important;
-    padding: 0.45rem 1.4rem !important;
     border: 1px solid var(--accent-soft) !important;
+    padding: 0.45rem 1.4rem !important;
     font-weight: 600 !important;
     transition: 0.2s ease-in-out !important;
 }
 
+
+/* Hover */
 .navbar .btn-registrarse:hover {
     background: var(--accent-soft) !important;    /* azul académico */
-    color: white !important;
+    color: #ffffff !important;
 }
+
+
+

@@ -52,7 +52,7 @@ body{
 .btn-outline-light{
   --bs-btn-color: #e5e7eb;
   --bs-btn-border-color: #e5e7eb;
-  --bs-btn-hover-color: #0b1220;
+  --bs-btn-hover-color: #ebeced;
   --bs-btn-hover-bg: #e5e7eb;
   --bs-btn-hover-border-color: #e5e7eb;
 }

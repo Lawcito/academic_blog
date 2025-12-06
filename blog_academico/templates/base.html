@@ -23,7 +23,7 @@
 
   {# Header + Navbar Bootstrap #}
   <header class="border-bottom border-dark-subtle">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: hsla(221, 39%, 11%, 0.651); backdrop-filter: blur(8px);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: hsla(221, 88%, 27%, 0.651); backdrop-filter: blur(8px);">
       <div class="container">
         <a class="navbar-brand d-inline-flex align-items-center" href="{% url 'home' %}">
           <img src="{% static 'img/logo2.png' %}" alt="Imagen del blog" style="height:100px;width:auto;">
@@ -66,7 +66,8 @@
                 <a class="btn btn-outline-primary w-100" href="{% url 'login' %}"> Iniciar Sesión </a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-primary w-100" href="{% url 'registro' %}"> Registrarse </a>
+                <a class="btn btn-registrarse w-100" href="{% url 'registro' %}"> Registrarse </a>
+
               </li>
             {% endif %}
           </ul>
