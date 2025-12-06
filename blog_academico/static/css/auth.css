@@ -80,19 +80,16 @@ body {
 }
 
 /* Botón – ROJO/BORDÓ (tu pedido) */
-.btn-primary {
-    margin-top: 0.75rem !important;
-    border: none !important;
+/* Botón de la barra de navegación: estilo azul marino uniforme */
+.navbar .btn-primary {
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg-main)) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
     border-radius: 999px !important;
-    padding: 0.65rem 1.6rem !important;
-    font-size: 0.95rem !important;
+    padding: 0.45rem 1.4rem !important;
     font-weight: 600 !important;
-    cursor: pointer !important;
-    background: linear-gradient(135deg, #7a0f1c, #b51222) !important;
-    color: white !important;
-    box-shadow: 0 12px 25px rgba(181, 18, 34, 0.4) !important;
-    transition: 0.2s ease-in-out !important;
 }
+
 
 .btn-primary:hover {
     filter: brightness(1.15) !important;
@@ -129,4 +126,23 @@ body {
         grid-template-columns: 1fr;
         padding: 2rem 1rem;
     }
+}
+/* Botón principal del formulario: que no quede pegado al link de abajo */
+.auth-form .btn-primary {
+    margin-bottom: 1rem !important;  /* espacio con "¿Ya tenés cuenta? Iniciá sesión" */
+}
+/* === BOTÓN "Registrarse" DEL NAVBAR EN AZUL MARINO === */
+.navbar .btn-registrarse {
+    background: var(--bg-main) !important;       /* azul marino principal */
+    color: #fff !important;
+    border-radius: 999px !important;
+    padding: 0.45rem 1.4rem !important;
+    border: 1px solid var(--accent-soft) !important;
+    font-weight: 600 !important;
+    transition: 0.2s ease-in-out !important;
+}
+
+.navbar .btn-registrarse:hover {
+    background: var(--accent-soft) !important;    /* azul académico */
+    color: white !important;
 }
