@@ -2,10 +2,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/auth.css' %}">
-{% endblock %}
-
+{% block extra_css %}{% endblock %}
 
 {% block content %}
 <div class="auth-wrapper">
@@ -18,7 +15,6 @@
         <form method="post" class="auth-form">
             {% csrf_token %}
 
-            {# Errores generales del formulario #}
             {% if form.non_field_errors %}
                 <div class="form-errors">
                     {% for error in form.non_field_errors %}
@@ -27,7 +23,6 @@
                 </div>
             {% endif %}
 
-            {# Campos del formulario #}
             {% for field in form %}
                 <div class="form-group {% if field.errors %}has-error{% endif %}">
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -43,15 +38,11 @@
                 </div>
             {% endfor %}
 
-            <button type="submit" class="btn-primary">Registrarme</button>
+            <button type="submit" class="btn btn-primary auth-submit-btn">Registrarme</button>
         </form>
-        
 
         <p class="auth-alt">
-
-
             ¿Ya tenés cuenta?
-
             <a href="{% url 'login' %}" class="btn-secondary"> Iniciá sesión </a>
         </p>
     </div>

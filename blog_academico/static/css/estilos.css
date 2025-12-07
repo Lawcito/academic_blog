@@ -1,99 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap');
+
+/* PALETA GENERAL DEL SITIO */
 :root{
-  --bg: #041a4b;        /* fondo superior */
-  --panel: #0b1220;     /* panel oscuro de contenido */
-  --text: #e5e7eb;      /* texto claro */
+  --bg: #041a4b;         /* fondo superior general */
+  --panel: #0b1220;      /* panel oscuro */
+  --text: #e5e7eb;       /* texto claro */
+
+  /* Paleta campus universitaria */
+  --bg-main: #0f172a;
+  --bg-card: #0b1120;
+  --accent: #3b82f6;      /* azul académico */
+  --accent-soft: #1d4ed8; /* azul intermedio */
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --error: #f97373;
+  --border-soft: #1f2937;
+  --input-bg: #020617;
+
+  /* Botones del registro */
+  --btn-registro: linear-gradient(135deg, #7a0f1c, #b51222);  /* rojo CTA */
+  --btn-login: linear-gradient(135deg, var(--accent-soft), var(--accent));
 }
 
 /* Altura base */
 html, body { height: 100%; }
 
-/* Fondo global y color de texto por defecto */
+/* Fuente y fondo global */
 body{
+  font-family: 'Montserrat', sans-serif;
   background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
   color: var(--text);
 }
 
-/* === Superficies === */
-.bg-surface{              /* la usás en <body class="bg-surface"> */
+.bg-surface{
   background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
-  color: var(--text);
+  color: var(--text-main);
 }
-
-/* Panel central (donde va {% block content %}) */
+/* Panel donde va {% block content %} */
 .bg-panel{
   background: var(--panel);
   color: #e5e7eb;
-  /* bordes y radio (si el template los necesita) */
-  /* border: 1px solid #334155; */
-  /* border-radius: 1rem; */
-}
-.bg-panel h1,
-.bg-panel h2,
-.bg-panel p,
-.bg-panel .lead{
-  color: #e5e7eb;
 }
 
-/* Footer */
+/* Footer institucional */
 .bg-footer{
-  background: #111827; /* gris muy oscuro */
+  background: #111827;
   color: #e5e7eb;
 }
-
-/* Contraste de botón info en fondo oscuro (Bootstrap) */
-.btn-info{
-  --bs-btn-bg: #06b6d4;
-  --bs-btn-border-color: #06b6d4;
-  --bs-btn-hover-bg: #22d3ee;
-  --bs-btn-hover-border-color: #22d3ee;
-}
-
-/* Mejorar outline de btn-outline-light en fondo oscuro */
-.btn-outline-light{
-  --bs-btn-color: #e5e7eb;
-  --bs-btn-border-color: #e5e7eb;
-  --bs-btn-hover-color: #ebeced;
-  --bs-btn-hover-bg: #e5e7eb;
-  --bs-btn-hover-border-color: #e5e7eb;
-}
-
-/* Navbar toggler visible en fondo oscuro */
+/* Toggler visible */
 .navbar-dark .navbar-toggler-icon{
   filter: invert(1) grayscale(1);
 }
 
-/* Navegación responsive: en mobile, que los botones ocupen todo el ancho y se apilen */
+/* Botón "Registrarse" azul marino */
+.navbar .btn-registrarse {
+    background: var(--bg-main) !important;
+    color: #fff !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--accent-soft) !important;
+    padding: 0.45rem 1.4rem !important;
+    font-weight: 600 !important;
+}
+
+.navbar .btn-registrarse:hover {
+    background: var(--accent-soft) !important;
+}
+
+/* Botones responsivos */
 .navbar-nav .btn{
   width: 100%;
 }
-@media (min-width: 992px){ /* lg en Bootstrap */
+
+@media (min-width: 992px){
   .navbar-nav{
     gap: .5rem;
     align-items: center;
   }
-  .navbar-nav .btn{
-    width: auto; /* en desktop vuelven a su tamaño natural */
-  }
+  .navbar-nav .btn{ width: auto; }
+}
+input, textarea, select {
+  border-radius: 8px;
+}
+.auth-wrapper {
+    min-height: calc(100vh - 120px);
+    display: grid;
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+}
+/* === Campos del formulario de registro, bien alineados === */
+.auth-card .form-group {
+    margin-bottom: 0.9rem;
 }
 
-/* Tablas responsivas (que nunca "tapen" contenido) */
-.table-responsive{
-  position: relative;
-  overflow-x: auto;
+.auth-card .form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
 }
 
-/* Links de accesibilidad (skip link) visibles al enfocar con teclado */
-.visually-hidden-focusable:focus{
-  left: 12px !important;
-  top: 12px !important;
-  position: fixed !important;
-  z-index: 1000;
+.auth-card .form-group input,
+.auth-card .form-group select,
+.auth-card .form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Detalles de tipografía y utilidades */
-a.link-light:visited{ color: #cbd5e1; }
-.text-secondary{ color: #cbd5e1 !important; }
-
-@media (prefers-reduced-motion: reduce){
-  *{ animation: none !important; transition: none !important; }
+/* Que el texto de ayuda quede debajo y no "pegado" al input */
+.auth-card .help-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
 }
+
+
+.error-msg {
+    margin-top: .25rem;
+    font-size: .8rem;
+    color: var(--error);
+}
+.auth-card .btn-primary {
+    margin-top: 1.2rem !important;
+    margin-bottom: 1.2rem !important;  /* SEPARACIÓN MAYOR */
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 0.8rem 1.6rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    background: var(--btn-registro) !important;
+    color: white !important;
+    box-shadow: 0 12px 25px rgba(181, 18, 34, 0.4);
+}
+
+.auth-card .btn-primary:hover {
+    filter: brightness(1.18);
+}
+.btn-secondary {
+    display: inline-block !important;
+    padding: .45rem 1rem !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    background: var(--btn-login) !important;
+    color: #fff !important;
+    font-size: .9rem !important;
+    margin-top: .8rem;
+}
+.auth-alt {
+    margin-top: 1.2rem;
+    font-size: .9rem;
+    color: var(--text-muted);
+}
+.auth-aside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-aside-content {
+    background: rgba(11, 15, 32, 0.96);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.85);
+}
+
+.auth-aside-content h2 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.7rem;
+}
+
+.auth-aside-content ul { margin-left: 1.2rem; }
+@media (max-width: 900px) {
+    .auth-wrapper {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+    }
+    .auth-aside { order: -1; margin-bottom: 1.5rem; }
+}
+/* =========================
+   AJUSTES FINALES REGISTRO
+   ========================= */
+
+/* Botón principal "Registrarme" (ROJO, tamaño moderado, centrado) */
+.auth-card .auth-submit-btn {
+    display: inline-block;
+    width: auto;
+    min-width: 220px;
+    padding: 0.7rem 1.8rem;
+    margin: 1.2rem auto 0.8rem auto;  /* lo centra y separa de arriba/abajo */
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #7a0f1c, #b51222);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 10px 22px rgba(181, 18, 34, 0.45);
+    cursor: pointer;
+}
+
+.auth-card .auth-submit-btn:hover {
+    filter: brightness(1.12);
+}
+
+/* Texto "¿Ya tenés cuenta? Iniciá sesión" un poco más separado del botón */
+.auth-alt {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Botón / pill "Iniciá sesión" en azul académico */
+.auth-alt .btn-secondary {
+    display: inline-block;
+    margin-left: 0.3rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+    color: #ffffff;
+    border: none;
+}
+
+.auth-alt .btn-secondary:hover {
+    filter: brightness(1.1);
+}
+/* === Botón "Registrarse" del navbar: azul, igual de visible que los otros === */
+.navbar .btn-registrarse {
+    background: #1d4ed8 !important;           /* azul como "Iniciar sesión" pero lleno */
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    border: 1px solid #1d4ed8 !important;
+    padding: 0.35rem 1.1rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.5);
+}
+
+.navbar .btn-registrarse:hover {
+    background: #3b82f6 !important;           /* un poquito más claro al pasar el mouse */
+    border-color: #3b82f6 !important;
+}
+
+/* === Layout del registro: 2 columnas en escritorio, 1 en mobile === */
+.auth-wrapper {
+    display: grid !important;
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+/* Solo en pantallas chicas pasa a una columna */
+@media (max-width: 900px) {
+    .auth-wrapper {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+    }
+
+    .auth-aside {
+        order: -1;
+        margin-bottom: 1.5rem;
+    }
+}
+
+
