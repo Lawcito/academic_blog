@@ -45,7 +45,11 @@ body{
 
 /* Footer institucional */
 .bg-footer{
+<<<<<<< HEAD
   background: #111827;
+=======
+  background: #0446d4; /* gris muy oscuro */
+>>>>>>> 2e22f0aebbbdce579238773da6043ce36aa9268f
   color: #e5e7eb;
 }
 /* Toggler visible */
@@ -53,6 +57,7 @@ body{
   filter: invert(1) grayscale(1);
 }
 
+<<<<<<< HEAD
 /* Botón "Registrarse" azul marino */
 .navbar .btn-registrarse {
     background: var(--bg-main) !important;
@@ -68,6 +73,15 @@ body{
 }
 
 /* Botones responsivos */
+=======
+/* Estilos de los formularios */
+form .form-control {
+    background-color: #92acd3 !important;
+    color: white !important;
+}
+
+/* Navegación responsive: en mobile, que los botones ocupen todo el ancho y se apilen */
+>>>>>>> 2e22f0aebbbdce579238773da6043ce36aa9268f
 .navbar-nav .btn{
   width: 100%;
 }
@@ -114,6 +128,7 @@ input, textarea, select {
     color: var(--text-muted);
 }
 
+<<<<<<< HEAD
 
 .error-msg {
     margin-top: .25rem;
@@ -264,3 +279,5 @@ input, textarea, select {
 }
 
 
+=======
+>>>>>>> 2e22f0aebbbdce579238773da6043ce36aa9268f
