@@ -1,0 +1,107 @@
+{# templates/base.html #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}Blog Academico{% endblock %}</title>
+
+  {# Bootstrap CSS #}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  {# CSS propio #}
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+  
+</head>
+
+<body class="bg-surface text-light">
+
+  {# Header + Navbar Bootstrap #}
+  <header class="border-bottom border-dark-subtle">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: hsla(221, 39%, 11%, 0.651); backdrop-filter: blur(8px);">
+      <div class="container">
+        <a class="navbar-brand d-inline-flex align-items-center" href="{% url 'home' %}">
+          <!-- Cambiar la imagen por otra en el navbar -->
+          <img src="{% static 'img/logo2.png' %}" alt="Imagen del blog" style="height:100px;width:auto;">
+          <span class="visually-hidden">Inicio</span>
+        </a>
+
+        {# Botón imprescindible para mobile #}
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navMain"
+                aria-controls="navMain" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMain">
+          <ul class="navbar-nav ms-auto gap-2 align-items-start align-items-lg-center">
+
+            {# --- HOME --- #}
+            <li class="nav-item">
+              <a class="btn btn-danger w-100" href="{% url 'home' %}">INICIO</a>
+            </li>
+
+            {# --- Bloque que cada vista puede rellenar con su navegación propia --- #}
+            {% block navegation %}{% endblock %}
+
+            {# --- Login/Logout --- #}
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="btn btn-primary w-100" href="{% url 'blog_edicion:crear_articulo' %}">Crear Artículo</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Hola, {{ user.username }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="btn btn-outline-primary w-100" href="{% url 'login' %}">Iniciar Sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-primary w-100" href="{% url 'registro' %}">Registrarse</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  {# Contenido #}
+  <main id="contenido" class="container my-4">
+    <div class="p-4 rounded-4 border border-dark-subtle bg-panel text-black">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  {# Footer #}
+  <footer class="mt-5 py-4 border-top border-dark-subtle bg-footer">
+    <div class="container small">
+      <address class="mb-1">
+        <strong>Contacto:</strong>
+        <a class="link-light text-decoration-underline" href="mailto:tup@frlp.utn.edu.ar">tup@frlp.utn.edu.ar</a> — 
+        Avenida 60 y Calle 124, Berisso, Provincia de Buenos Aires, República Argentina.
+      </address>
+      <div class="text-secondary">
+        HTML5 semántico, componentes Bootstrap y prácticas alineadas a W3C/WCAG AA.
+      </div>
+    </div>
+  </footer>
+
+  {# Formulario oculto para Logout #}
+  {% if user.is_authenticated %}
+    <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+      {% csrf_token %}
+    </form>
+  {% endif %}
+
+  {# Bootstrap JS (bundle) #}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
