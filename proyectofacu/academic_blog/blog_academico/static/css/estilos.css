@@ -53,7 +53,7 @@ body {
 }
 
 /* ==================================================== */
-/* === VIDEO BANNER (COLOCACIÓN Y FONDO DE AGUA) === */
+/* === VIDEO BANNER (REGLAS DEL FONDO DE AGUA) === */
 /* ==================================================== */
 
 /* Contenedor del video */
@@ -63,13 +63,12 @@ body {
 }
 
 .video-background-element {
-  /* Estas reglas se han movido INLINE, pero las mantenemos por si el navegador las requiere */
   object-fit: cover;
   /* FILTRO FINAL de sutileza y opacidad */
   filter: grayscale(80%) blur(1px);
 }
 
-/* Capa de oscuridad sobre el video (La opacidad se define INLINE en index.html) */
+/* Capa de oscuridad sobre el video */
 .video-overlay {
   z-index: 2;
 }
@@ -82,6 +81,56 @@ main#contenido {
   z-index: 5;
 }
 
+
+/* ==================================================== */
+/* === ESTILOS TARJETAS (LOOK TECNOLÓGICO/SERIO) === */
+/* ==================================================== */
+
+/* Fondo de tarjeta transparente para que herede el color del panel */
+.card {
+  background: transparent !important;
+  border: 1px solid var(--panel) !important;
+  /* Borde suave */
+}
+
+/* Base de borde y header sutil (Cian/Azul) */
+.border-custom-primary {
+  border: 1px solid #06b6d4 !important;
+}
+
+.border-custom-primary-bottom {
+  border-bottom: 2px solid #06b6d4 !important;
+}
+
+/* Base de borde y header sutil (Verde) */
+.border-custom-success {
+  border: 1px solid #10b981 !important;
+}
+
+.border-custom-success-bottom {
+  border-bottom: 2px solid #10b981 !important;
+}
+
+/* Base de borde y header sutil (Turquesa/Info) */
+.border-custom-info {
+  border: 1px solid #22d3ee !important;
+}
+
+.border-custom-info-bottom {
+  border-bottom: 2px solid #22d3ee !important;
+}
+
+/* Aseguramos que el fondo de los elementos internos de la lista sea transparente */
+.list-group-item {
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  /* Separadores sutiles */
+}
+
+
+/* ==================================================== */
+/* === ESTILOS DE UTILIDADES Y BOTONES (Bootstrap Overrides) === */
+/* ==================================================== */
 
 /* Contraste de botón info en fondo oscuro (Bootstrap) */
 .btn-info {
@@ -137,7 +186,6 @@ main#contenido {
   z-index: 1000;
 }
 
-/* === CORRECCIÓN UTILIDADES === */
 /* Arreglar texto secundario y muted para que se vean en fondo oscuro */
 a.link-light:visited {
   color: #cbd5e1;
