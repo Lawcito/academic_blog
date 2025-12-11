@@ -25,15 +25,13 @@ body {
   color: var(--text);
 }
 
-/* === CORRECCIÓN AQUÍ: Panel central === */
+/* === Panel central (Asegura color blanco) === */
 .bg-panel {
   background: var(--panel);
   color: #e5e7eb;
 }
 
-/* He agregado h3, h4, h5, h6, small y span a la lista 
-   para asegurar que el subtítulo y textos pequeños se vean blancos 
-*/
+/* Asegurar que todos los elementos de texto sean blancos dentro del panel, ignorando temas externos */
 .bg-panel h1,
 .bg-panel h2,
 .bg-panel h3,
@@ -53,6 +51,37 @@ body {
   /* gris muy oscuro */
   color: #e5e7eb;
 }
+
+/* ==================================================== */
+/* === VIDEO BANNER (COLOCACIÓN Y FONDO DE AGUA) === */
+/* ==================================================== */
+
+/* Contenedor del video */
+.video-background-layer {
+  z-index: 1;
+  overflow: hidden;
+}
+
+.video-background-element {
+  /* Estas reglas se han movido INLINE, pero las mantenemos por si el navegador las requiere */
+  object-fit: cover;
+  /* FILTRO FINAL de sutileza y opacidad */
+  filter: grayscale(80%) blur(1px);
+}
+
+/* Capa de oscuridad sobre el video (La opacidad se define INLINE en index.html) */
+.video-overlay {
+  z-index: 2;
+}
+
+/* El contenido principal ya no necesita margen superior */
+main#contenido {
+  margin-top: 2rem;
+  padding-top: 0;
+  position: relative;
+  z-index: 5;
+}
+
 
 /* Contraste de botón info en fondo oscuro (Bootstrap) */
 .btn-info {
