@@ -1,0 +1,143 @@
+:root {
+  --bg: #041a4b;
+  /* fondo superior */
+  --panel: #0b1220;
+  /* panel oscuro de contenido */
+  --text: #e5e7eb;
+  /* texto claro */
+}
+
+/* Altura base */
+html,
+body {
+  height: 100%;
+}
+
+/* Fondo global y color de texto por defecto */
+body {
+  background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
+  color: var(--text);
+}
+
+/* === Superficies === */
+.bg-surface {
+  background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
+  color: var(--text);
+}
+
+/* === CORRECCIÓN AQUÍ: Panel central === */
+.bg-panel {
+  background: var(--panel);
+  color: #e5e7eb;
+}
+
+/* He agregado h3, h4, h5, h6, small y span a la lista 
+   para asegurar que el subtítulo y textos pequeños se vean blancos 
+*/
+.bg-panel h1,
+.bg-panel h2,
+.bg-panel h3,
+.bg-panel h4,
+.bg-panel h5,
+.bg-panel h6,
+.bg-panel p,
+.bg-panel .lead,
+.bg-panel small,
+.bg-panel span {
+  color: #e5e7eb !important;
+}
+
+/* Footer */
+.bg-footer {
+  background: #111827;
+  /* gris muy oscuro */
+  color: #e5e7eb;
+}
+
+/* Contraste de botón info en fondo oscuro (Bootstrap) */
+.btn-info {
+  --bs-btn-bg: #06b6d4;
+  --bs-btn-border-color: #06b6d4;
+  --bs-btn-hover-bg: #22d3ee;
+  --bs-btn-hover-border-color: #22d3ee;
+  color: #000;
+  /* Asegura texto legible dentro del botón */
+}
+
+/* Mejorar outline de btn-outline-light en fondo oscuro */
+.btn-outline-light {
+  --bs-btn-color: #e5e7eb;
+  --bs-btn-border-color: #e5e7eb;
+  --bs-btn-hover-color: #0b1220;
+  --bs-btn-hover-bg: #e5e7eb;
+  --bs-btn-hover-border-color: #e5e7eb;
+}
+
+/* Navbar toggler visible en fondo oscuro */
+.navbar-dark .navbar-toggler-icon {
+  filter: invert(1) grayscale(1);
+}
+
+/* Navegación responsive */
+.navbar-nav .btn {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .navbar-nav {
+    gap: .5rem;
+    align-items: center;
+  }
+
+  .navbar-nav .btn {
+    width: auto;
+  }
+}
+
+/* Tablas responsivas */
+.table-responsive {
+  position: relative;
+  overflow-x: auto;
+}
+
+/* Links de accesibilidad */
+.visually-hidden-focusable:focus {
+  left: 12px !important;
+  top: 12px !important;
+  position: fixed !important;
+  z-index: 1000;
+}
+
+/* === CORRECCIÓN UTILIDADES === */
+/* Arreglar texto secundario y muted para que se vean en fondo oscuro */
+a.link-light:visited {
+  color: #cbd5e1;
+}
+
+.text-secondary,
+.text-muted {
+  color: #cbd5e1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.btn-borrar {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-borrar:hover {
+  background-color: #c82333;
+}

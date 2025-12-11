@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Todas las Noticias{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Muro de Novedades</h2>
+        <p class="text-muted">Archivo completo de noticias y eventos de la facultad.</p>
+    </div>
+
+    <div class="row">
+        {% for articulo in articulos %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm hover-effect">
+                {% if articulo.imagen %}
+                <img src="{{ articulo.imagen.url }}" class="card-img-top" alt="{{ articulo.titulo }}"
+                    style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <span class="badge bg-primary mb-2">{{ articulo.categoria.nombre }}</span>
+                    <h5 class="card-title fw-bold">{{ articulo.titulo }}</h5>
+                    <p class="card-text text-secondary">{{ articulo.contenido|truncatewords:15 }}</p>
+                </div>
+                <div class="card-footer bg-white border-top-0 d-grid">
+                    <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}"
+                        class="btn btn-outline-primary">Leer nota completa</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No hay noticias en el historial.</p>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'blog_edicion:lista_articulos' %}" class="btn btn-secondary">&larr; Volver al Portal
+            (Inicio)</a>
+    </div>
+</div>
+{% endblock %}

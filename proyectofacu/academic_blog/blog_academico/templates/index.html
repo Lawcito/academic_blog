@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Inicio - Blog Académico{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-5">
+  <h1 class="display-4 fw-bold" style="color: white;">Bienvenidos</h1>
+  <p class="lead" style="color: white;">Portal de la Tecnicatura Universitaria en Programación - UTN FRLP</p>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm border-primary">
+      <div class="card-header bg-primary text-white text-center">
+        <h5 class="mb-0">📅 Calendario Académico</h5>
+      </div>
+      <div class="card-body p-0">
+        <img src="{% static 'img/calendario_2025.jpg' %}" class="img-fluid" alt="Calendario 2025"
+          style="width: 100%; height: auto;">
+
+        <div class="p-3">
+          <ul class="list-group list-group-flush small">
+            {% for evento in eventos %}
+            <li class="list-group-item">
+              <strong>{{ evento.fecha|date:"d/m" }}:</strong> {{ evento.titulo }}
+            </li>
+            {% empty %}
+            <li class="list-group-item" style="color: black !important;">No hay eventos próximos.</li>
+            {% endfor %}
+          </ul>
+          <div class="d-grid mt-3">
+            <a href="#" class="btn btn-outline-primary btn-sm">Ver calendario completo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm border-success">
+      <div class="card-header bg-success text-white text-center">
+        <h5 class="mb-0">📰 Últimas Noticias</h5>
+      </div>
+
+      <div class="card-body overflow-auto" style="max-height: 500px;">
+        {% for articulo in articulos %}
+        <div class="card mb-3 border-0 shadow-none">
+          <div class="row g-0">
+            {% if articulo.imagen %}
+            <div class="col-4">
+              <img src="{{ articulo.imagen.url }}" class="img-fluid rounded-start h-100" style="object-fit: cover;"
+                alt="img">
+            </div>
+            {% endif %}
+            <div class="col-{% if articulo.imagen %}8{% else %}12{% endif %}">
+              <div class="card-body p-2">
+                <h6 class="card-title mb-1" style="font-size: 0.9rem; font-weight: bold;">
+                  <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}" class="text-decoration-none"
+                    style="color: black !important;">
+                    {{ articulo.titulo }}
+                  </a>
+                </h6>
+
+                <p class="card-text small mb-1" style="color: black !important;">
+                  {{ articulo.bajada|default:articulo.cuerpo|truncatewords:8 }}
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <small class="text-success" style="font-size: 0.7rem;">
+                    {{ articulo.fecha_publicacion|date:"d M Y" }}
+                  </small>
+
+                  {% if user.is_authenticated and user == articulo.autor %}
+                  <div>
+                    <a href="{% url 'blog_edicion:editar_articulo' pk=articulo.pk %}"
+                      class="badge bg-warning text-dark text-decoration-none">Editar</a>
+                    <a href="{% url 'blog_edicion:eliminar_articulo' pk=articulo.pk %}"
+                      class="badge bg-danger text-white text-decoration-none">Eliminar</a>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-1">
+        {% empty %}
+        <p class="text-center mt-4" style="color: black !important; font-weight: bold;">No hay novedades por ahora.</p>
+        {% endfor %}
+      </div>
+
+      <div class="card-footer bg-white text-center">
+        <a href="{% url 'blog_edicion:ver_todas_noticias' %}" class="btn btn-success btn-sm w-100">
+          Ir al muro de noticias &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm border-info">
+      <div class="card-header bg-info text-white text-center">
+        <h5 class="mb-0">📁 Apuntes y Parciales</h5>
+      </div>
+      <div class="card-body text-center d-flex flex-column justify-content-center">
+
+        <div class="mb-3">
+          <i class="fas fa-folder-open fa-3x text-info mb-3"></i>
+          <p class="card-text" style="color: black !important; font-weight: 500;">
+            Accedé al repositorio de materiales de estudio, organizados por materia y carrera.
+          </p>
+        </div>
+
+        <div class="d-grid gap-2">
+          <a href="{% url 'blog_edicion:subir_apunte' %}" class="btn btn-info text-white fw-bold">
+            ⬆ Subir un Apunte
+          </a>
+          <a href="#" class="btn btn-outline-info">
+            🔍 Buscar Material
+          </a>
+        </div>
+
+        <div class="mt-4 text-start small">
+          <p class="fw-bold mb-1" style="color: black !important;">Destacados (Últimos subidos):</p>
+          <ul class="list-unstyled">
+            {% for apunte in apuntes %}
+            <li class="mb-2">
+              <a href="{{ apunte.archivo.url }}" class="text-decoration-none" style="color: black !important;"
+                target="_blank">
+                <strong>📄 {{ apunte.titulo }}</strong>
+                <span style="color: black !important;">({{ apunte.materia.nombre }})</span>
+              </a>
+            </li>
+            {% empty %}
+            <li style="color: black !important;">Aún no hay apuntes subidos.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
