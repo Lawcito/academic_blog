@@ -2,8 +2,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}{% endblock %}
-
 {% block content %}
 <div class="auth-wrapper">
     <div class="auth-card">
@@ -15,6 +13,7 @@
         <form method="post" class="auth-form">
             {% csrf_token %}
 
+            {# Errores generales del formulario #}
             {% if form.non_field_errors %}
                 <div class="form-errors">
                     {% for error in form.non_field_errors %}
@@ -23,6 +22,7 @@
                 </div>
             {% endif %}
 
+            {# Campos del formulario #}
             {% for field in form %}
                 <div class="form-group {% if field.errors %}has-error{% endif %}">
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -38,28 +38,85 @@
                 </div>
             {% endfor %}
 
-            <button type="submit" class="btn btn-primary auth-submit-btn">Registrarme</button>
+            <button type="submit" class="btn-primary">Registrarme</button>
         </form>
 
         <p class="auth-alt">
             ¿Ya tenés cuenta?
-            <a href="{% url 'login' %}" class="btn-secondary"> Iniciá sesión </a>
+            <a href="{% url 'login' %}" class="btn-secondary">Iniciá sesión</a>
         </p>
     </div>
 
     <aside class="auth-aside">
         <div class="auth-aside-content">
+
             <h2>Comunidad universitaria</h2>
             <p>Publicá artículos, resúmenes y experiencias de cursada.</p>
-            <ul>
-                <li>Apuntes de materias</li>
-                <li>Material de estudio</li>
-                <li>Debates con tus compañeros</li>
-            </ul>
+
+            <!-- APUNTES -->
+            <div class="aside-section">
+                <h3>Apuntes de materias</h3>
+                <p class="aside-text">Subí y consultá apuntes organizados por materia y tema.</p>
+
+                <ul class="aside-list">
+                    {% for apunte in ultimos_apuntes %}
+                        <li>
+                            <strong>{{ apunte.titulo }}</strong>
+                            <span class="aside-item-meta">· {{ apunte.materia.nombre }}</span>
+                        </li>
+                    {% empty %}
+                        <li class="aside-empty">Todavía no hay apuntes cargados.</li>
+                    {% endfor %}
+                </ul>
+
+                <a href="{% url 'apuntes_lista' %}" class="aside-link">Ver todos los apuntes</a>
+            </div>
+
+            <!-- MATERIAL -->
+            <div class="aside-section">
+                <h3>Material de estudio</h3>
+                <p class="aside-text">Textos, guías y recursos utilizados en cada cursada.</p>
+
+                <ul class="aside-list">
+                    {% for material in ultimos_materiales %}
+                        <li>
+                            <strong>{{ material.titulo }}</strong>
+                            <span class="aside-item-meta">· {{ material.materia.nombre }}</span>
+                        </li>
+                    {% empty %}
+                        <li class="aside-empty">Sin material cargado por el momento.</li>
+                    {% endfor %}
+                </ul>
+
+                <a href="{% url 'materiales_lista' %}" class="aside-link">Ver material de estudio</a>
+            </div>
+
+            <!-- DEBATES -->
+            <div class="aside-section">
+                <h3>Debates con tus compañeros</h3>
+                <p class="aside-text">Comentá dudas, compartí tips y experiencias de cursada.</p>
+
+                <ul class="aside-list">
+                    {% for debate in ultimos_debates %}
+                        <li>
+                            <a href="{% url 'debate_detalle' debate.pk %}">
+                                {{ debate.titulo }}
+                                <span class="aside-item-meta">· {{ debate.materia.nombre }}</span>
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li class="aside-empty">Todavía no hay debates abiertos.</li>
+                    {% endfor %}
+                </ul>
+
+                <a href="{% url 'debates_lista' %}" class="aside-link">Ver todos los debates</a>
+            </div>
+
             <p class="aside-footer">
                 <span class="badge">Blog Universitario</span>
             </p>
         </div>
     </aside>
 </div>
+
 {% endblock %}

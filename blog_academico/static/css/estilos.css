@@ -1,251 +1,323 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap');
-
-/* === PALETA GENERAL DEL SITIO === */
 :root{
-  --bg: #041a4b;         /* fondo superior general */
-  --panel: #0b1220;      /* panel oscuro */
-  --text: #e5e7eb;       /* texto claro */
-
-  /* Paleta campus universitaria */
-  --bg-main: #0f172a;
-  --bg-card: #0b1120;
-  --accent: #3b82f6;      /* azul académico */
-  --accent-soft: #1d4ed8; /* azul intermedio */
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
-  
-  --error: #f97373;
-  --border-soft: #1f2937;
-  --input-bg: #020617; /* Fondo más oscuro para inputs */
-
-  /* Botones del registro */
-  --btn-registro: linear-gradient(135deg, #7a0f1c, #b51222);  /* rojo CTA */
-  --btn-login: linear-gradient(135deg, var(--accent-soft), var(--accent));
+  --bg: #041a4b;        /* fondo superior */
+  --panel: #0b1220;     /* panel oscuro de contenido */
+  --text: #e5e7eb;      /* texto claro */
 }
 
-/* === BASE Y TIPOGRAFÍA === */
+/* Altura base */
 html, body { height: 100%; }
 
+/* Fondo global y color de texto por defecto */
 body{
-  font-family: 'Montserrat', sans-serif;
   background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
   color: var(--text);
 }
 
-.bg-surface{
+/* === Superficies === */
+.bg-surface{              /* la usás en <body class="bg-surface"> */
   background: linear-gradient(180deg, var(--bg) 0%, #0b1220 100%);
-  color: var(--text-main);
+  color: var(--text);
 }
+
+/* Panel central (donde va {% block content %}) */
 .bg-panel{
   background: var(--panel);
   color: #e5e7eb;
+  padding: 2rem;
+  border-radius: .5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
 }
+.bg-panel h1,
+.bg-panel h2,
+.bg-panel p,
+.bg-panel .lead{
+  color: hsl(250, 13%, 91%);
+}
+
+
 .bg-footer{
-  background: #111827; /* Usando el gris oscuro institucional */
+  background: #111827; /* gris muy oscuro */
   color: #e5e7eb;
 }
 
-/* Toggler visible */
+/* Contraste de botón info en fondo oscuro (Bootstrap) */
+.btn-info{
+  --bs-btn-bg: #06b6d4;
+  --bs-btn-border-color: #06b6d4;
+  --bs-btn-hover-bg: #22d3ee;
+  --bs-btn-hover-border-color: #22d3ee;
+}
+
+/* Mejorar outline de btn-outline-light en fondo oscuro */
+.btn-outline-light{
+  --bs-btn-color: #e5e7eb;
+  --bs-btn-border-color: #e5e7eb;
+  --bs-btn-hover-color: #0b1220;
+  --bs-btn-hover-bg: #e5e7eb;
+  --bs-btn-hover-border-color: #e5e7eb;
+}
+
+/* Navbar toggler visible en fondo oscuro */
 .navbar-dark .navbar-toggler-icon{
   filter: invert(1) grayscale(1);
 }
 
-/* === BARRA DE NAVEGACIÓN (NAVBAR) === */
-/* Botón "Registrarse" del navbar: azul, visible */
-.navbar .btn-registrarse {
-  background: var(--accent-soft) !important;
-  color: #ffffff !important;
-  border-radius: 999px !important;
-  border: 1px solid var(--accent-soft) !important;
-  padding: 0.35rem 1.1rem !important;
-  font-weight: 600 !important;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.5);
-}
-
-.navbar .btn-registrarse:hover {
-  background: var(--accent) !important;
-  border-color: var(--accent) !important;
-}
-
-/* Navegación responsiva */
+/* Navegación responsive: en mobile, que los botones ocupen todo el ancho y se apilen */
 .navbar-nav .btn{
   width: 100%;
 }
-
-@media (min-width: 992px){
+@media (min-width: 992px){ /* lg en Bootstrap */
   .navbar-nav{
     gap: .5rem;
     align-items: center;
   }
-  .navbar-nav .btn{ width: auto; }
+  .navbar-nav .btn{
+    width: auto; /* en desktop vuelven a su tamaño natural */
+  }
 }
 
-/* === ESTILOS DE FORMULARIO (GENERAL) === */
-input, textarea, select {
-  border-radius: 8px;
-  border: 1px solid var(--border-soft);
-  padding: 0.6rem 0.9rem;
-  background-color: var(--input-bg);
-  color: var(--text-main);
-  transition: border-color 0.3s ease;
+/* Tablas responsivas (que nunca "tapen" contenido) */
+.table-responsive{
+  position: relative;
+  overflow-x: auto;
 }
 
-input:focus, textarea:focus, select:focus {
-  border-color: var(--accent); /* Resaltar al enfocar */
-  outline: none;
+/* Links de accesibilidad (skip link) visibles al enfocar con teclado */
+.visually-hidden-focusable:focus{
+  left: 12px !important;
+  top: 12px !important;
+  position: fixed !important;
+  z-index: 1000;
 }
 
-/* Eliminar el estilo inconsistente de form-control, si existe */
-form .form-control {
-    background-color: var(--input-bg) !important;
-    color: var(--text-main) !important;
-    border: 1px solid var(--border-soft) !important;
+/* Detalles de tipografía y utilidades */
+a.link-light:visited{ color: #cbd5e1; }
+.text-secondary{ color: #cbd5e1 !important; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+/* =========================================================
+   SECCIÓN: Registro de usuario (auth)
+   ========================================================= */
+
+/* Layout general del bloque de registro */
+.auth-wrapper{
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--panel);
+  color: var(--text);
+  border-radius: .75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-/* === CONTENEDOR PRINCIPAL DEL REGISTRO (ACADÉMICO Y ORDENADO) === */
-.auth-wrapper {
-  min-height: calc(100vh - 120px);
-  display: grid !important; /* Asegurar el layout de cuadrícula */
-  grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
-  gap: 2.5rem;
-  padding: 3rem 1.5rem;
-  align-items: flex-start; /* Alinear arriba para un look más "documental" */
+.auth-card{
+  flex: 1 1 380px;
 }
 
-/* Campos del formulario de registro, bien alineados */
-.auth-card .form-group {
-  margin-bottom: 1.1rem; /* Más separación entre grupos para claridad */
+.auth-aside{
+  flex: 1 1 320px;
+  border-left: 1px solid #1f2937;
+  padding-left: 2rem;
 }
 
-.auth-card .form-group label {
-  display: block;
-  margin-bottom: 0.3rem; /* Espacio entre label y input */
+@media (max-width: 768px){
+  .auth-wrapper{
+    padding: 1.5rem;
+  }
+  .auth-aside{
+    border-left: none;
+    border-top: 1px solid #1f2937;
+    padding-left: 0;
+    padding-top: 1.5rem;
+  }
+}
+
+/* Títulos y textos */
+.auth-title{
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.auth-subtitle{
+  font-size: .95rem;
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+
+/* Formulario: evita que se encimen los rectángulos */
+.auth-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;          /* espacio entre campos */
+}
+
+/* Cada campo (label + input + ayuda + error) */
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  max-width: 420px;   /* limita el ancho y no invade la otra columna */
+}
+
+/* Label */
+.form-group label{
   font-weight: 500;
-  color: var(--text-main); /* Asegurar que el label sea claro */
+  font-size: .9rem;
 }
 
-.auth-card .form-group input,
-.auth-card .form-group select,
-.auth-card .form-group textarea {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Texto de ayuda debajo del input */
-.auth-card .help-text {
+/* Inputs, select y textarea: los “rectángulos” */
+.form-group input,
+.form-group select,
+.form-group textarea{
   display: block;
-  margin-top: 0.25rem;
-  font-size: 0.85rem; /* Ligeramente más grande para mejor lectura */
-  color: var(--text-muted);
+  width: 100%;
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  border: 1px solid #334155;
+  background-color: #020617;
+  color: var(--text);
+  box-sizing: border-box;   /* que no “crezca” más del ancho */
 }
 
-.error-msg {
+/* Texto de ayuda (requisitos contraseña, etc.) */
+.help-text{
   display: block;
   margin-top: .25rem;
-  font-size: .85rem;
-  color: var(--error);
+  font-size: .8rem;
+  color: #9ca3af;
+}
+
+/* Cuando Django arma la ayuda de contraseña con <ul><li> */
+.form-group ul{
+  margin: .25rem 0 0;
+  padding-left: 1.25rem;
+  font-size: .8rem;
+  color: #9ca3af;
+}
+
+/* Errores debajo del campo */
+.error-msg{
+  margin-top: .25rem;
+  font-size: .8rem;
+  color: #fca5a5;
+}
+
+/* Botón principal de registro (solo dentro de la tarjeta) */
+.auth-card .btn-primary{
+  margin-top: 1rem;
+  padding: .55rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: #3b82f6;
+  color: #e5e7eb;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-card .btn-primary:hover{
+  background: #2563eb;
+}
+
+/* Botón/enlace de “Iniciá sesión” */
+.auth-card .btn-secondary{
+  display: inline-block;
+  margin-left: .5rem;
+  padding: .4rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: .9rem;
   font-weight: 500;
 }
 
-/* === BOTONES DEL REGISTRO === */
-
-/* Botón principal "Registrarme" (ROJO, tamaño moderado, centrado) */
-.auth-card .auth-submit-btn {
-  display: block; /* Ocupar el ancho disponible para centrarlo */
-  width: auto;
-  min-width: 250px;
-  padding: 0.8rem 2rem;
-  margin: 1.5rem auto 1rem auto; /* Más separación arriba y abajo */
-  border-radius: 999px;
-  border: none;
-  background: var(--btn-registro);
-  color: #ffffff;
-  font-weight: 700; /* Más énfasis */
-  font-size: 1rem;
-  box-shadow: 0 10px 22px rgba(181, 18, 34, 0.45);
-  cursor: pointer;
-  text-align: center;
+.auth-card .btn-secondary:hover{
+  background: #e5e7eb;
+  color: #0b1220;
 }
 
-.auth-card .auth-submit-btn:hover {
-  filter: brightness(1.15);
+/* Texto que acompaña al botón de login */
+.auth-alt{
+  margin-top: .75rem;
+  font-size: .9rem;
 }
+/* =========================================================
+   Panel lateral interactivo del registro (auth-aside)
+   ========================================================= */
 
-/* Alternativa de inicio de sesión */
-.auth-alt {
-  text-align: center; /* Centrar el texto de alternativa */
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-}
-
-/* Botón / pill "Iniciá sesión" en azul académico */
-.auth-alt .btn-secondary {
-  display: inline-block;
-  margin-left: 0.5rem;
-  padding: 0.4rem 1.1rem;
-  border-radius: 999px;
+.auth-aside-content h3{
+  margin-bottom: .25rem;
+  font-size: 1.05rem;
+  color: #e5e7eb;
   font-weight: 600;
-  font-size: 0.9rem;
-  background: var(--btn-login);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
 }
 
-.auth-alt .btn-secondary:hover {
-  filter: brightness(1.1);
-}
-
-/* === ASIDE (COLUMNA LATERAL) === */
-.auth-aside {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 2rem; /* Separar del borde superior del wrapper */
-}
-
-.auth-aside-content {
-  background: rgba(11, 15, 32, 0.96);
-  border-radius: 1.5rem;
-  padding: 2.5rem; /* Más padding para hacerlo más sustancial */
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.85);
-}
-
-.auth-aside-content h2 {
-  font-family: 'Crimson Text', serif;
-  font-size: 2rem; /* Ligeramente más grande */
-  font-weight: 700;
+.aside-section{
   margin-bottom: 1.5rem;
-  color: var(--accent); /* Usar el azul académico para el título */
-  text-align: center;
 }
 
-.auth-aside-content ul {
-  list-style-type: '🎓 '; /* Ícono académico para lista */
-  margin-left: 1.5rem;
+.aside-text{
+  font-size: .85rem;
+  color: #cbd5e1;
+  margin-bottom: .5rem;
+}
+
+.aside-list{
+  list-style: none;
   padding-left: 0;
-}
-.auth-aside-content li {
-    margin-bottom: 0.8rem;
-    font-size: 1.05rem;
+  margin-bottom: .5rem;
 }
 
+.aside-list li{
+  padding: .25rem 0;
+  font-size: .85rem;
+  color: #e5e7eb;
+}
 
-/* === RESPONSIVE (MOBILE) === */
-@media (max-width: 900px) {
-  .auth-wrapper {
-    grid-template-columns: 1fr;
-    padding: 2rem 1rem;
-  }
-  .auth-aside {
-    order: -1; /* Mover el contenido lateral arriba */
-    margin-bottom: 1.5rem;
-    padding-top: 0;
-  }
-  .auth-card .auth-submit-btn {
-      min-width: 100%;
-      padding: 0.8rem 1.5rem;
-  }
+.aside-list li a{
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+.aside-list li a:hover{
+  text-decoration: underline;
+}
+
+.aside-empty{
+  color: #64748b;
+  font-size: .8rem;
+  font-style: italic;
+}
+
+.aside-item-meta{
+  color: #94a3b8;
+  font-size: .8rem;
+  margin-left: .3rem;
+}
+
+.aside-link{
+  display: inline-block;
+  font-size: .85rem;
+  color: #3b82f6;
+  text-decoration: none;
+  margin-top: .25rem;
+}
+
+.aside-link:hover{
+  text-decoration: underline;
+}
+
+.aside-footer{
+  margin-top: 2rem;
+  font-size: .8rem;
+  text-align: center;
 }

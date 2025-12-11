@@ -12,6 +12,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('articulos/', include('blog_edicion.urls')),
     path('admin/', admin.site.urls),
+    path('comunidad/', include('comunidad.urls')),
+
 ]
 
 if settings.DEBUG:
