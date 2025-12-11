@@ -7,8 +7,8 @@
   <div class="col-md-8 col-lg-6">
     <div class="card shadow border-0">
 
-      <div class="card-header bg-primary text-white text-center py-3">
-        <h4 class="mb-0">📝 Publicar Nuevo Contenido</h4>
+      <div class="card-header bg-success text-white text-center py-3">
+        <h4 class="mb-0">📝 Publicar Nueva Noticia</h4>
       </div>
 
       <div class="card-body p-4">
@@ -21,15 +21,25 @@
 
             {{ field }}
 
+            {% if field.name == 'cuerpo' %}
+            <div class="alert alert-warning mt-2 p-2 small">
+              <i class="fas fa-lightbulb"></i> <strong>Tip para enlaces:</strong>
+              Si quieres poner un link a otra página, escribe este código:<br>
+              <code>&lt;a href="https://google.com" target="_blank"&gt;Texto del enlace&lt;/a&gt;</code>
+            </div>
+            {% endif %}
+
+            {% if field.name == 'imagen' %}
+            <div class="form-text text-dark"> Sube el flyer o imagen principal del evento (Formatos: jpg, png).
+            </div>
+            {% endif %}
+
             {% if field.errors %}
             <div class="text-danger small mt-1">
               {{ field.errors }}
             </div>
             {% endif %}
 
-            {% if field.help_text %}
-            <small class="text-muted">{{ field.help_text }}</small>
-            {% endif %}
           </div>
           {% endfor %}
 
@@ -37,7 +47,8 @@
             <button type="submit" class="btn btn-success btn-lg">
               ✅ Publicar Ahora
             </button>
-            <a href="{% url 'blog_edicion:lista_articulos' %}" class="btn btn-secondary">
+
+            <a href="{% url 'blog_edicion:ver_todas_noticias' %}" class="btn btn-secondary">
               Cancelar
             </a>
           </div>

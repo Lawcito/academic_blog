@@ -1,15 +1,10 @@
-# Archivo: blog_edicion/views.py
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-
-# Importamos modelos nuevos
-from .models import Articulo, Apunte
-
-# Importamos los formularios (asegúrate de tenerlos en forms.py)
+from .models import Articulo, Apunte, Materia, Carrera
 from .forms import ArticuloForm, ApunteForm
 
-# --- TUS FUNCIONES DE BLOG (LO QUE YA TENÍAS) ---
+# --- SECCIÓN NOTICIAS ---
 
 
 @login_required
@@ -20,7 +15,9 @@ def crear_articulo(request):
             articulo = form.save(commit=False)
             articulo.autor = request.user
             articulo.save()
-            return redirect("home")  # Redirige al home del proyecto
+            # Sugerencia: Si quieres volver a la lista de noticias en vez del home,
+            # cambia "home" por el nombre de tu url de noticias.
+            return redirect("home")
     else:
         form = ArticuloForm()
     return render(request, "blog_edicion/crear_articulo.html", {"form": form})
@@ -29,9 +26,8 @@ def crear_articulo(request):
 @login_required
 def editar_articulo(request, pk):
     articulo = get_object_or_404(Articulo, pk=pk)
-    # Seguridad: solo el autor edita
     if articulo.autor != request.user:
-        return HttpResponseForbidden("No tienes permiso para editar este artículo.")
+        return HttpResponseForbidden("No tienes permiso.")
 
     if request.method == "POST":
         form = ArticuloForm(request.POST, request.FILES, instance=articulo)
@@ -40,6 +36,7 @@ def editar_articulo(request, pk):
             return redirect("home")
     else:
         form = ArticuloForm(instance=articulo)
+
     return render(
         request,
         "blog_edicion/editar_articulo.html",
@@ -62,11 +59,12 @@ def articulo_detalle(request, pk):
 
 
 def ver_todas_noticias(request):
+    # Trae las noticias de la más nueva a la más vieja
     articulos = Articulo.objects.all().order_by("-fecha_publicacion")
     return render(request, "blog_edicion/todas_noticias.html", {"articulos": articulos})
 
 
-# --- LO NUEVO: SUBIR APUNTES ---
+# --- SECCIÓN APUNTES ---
 
 
 @login_required
@@ -81,3 +79,38 @@ def subir_apunte(request):
     else:
         form = ApunteForm()
     return render(request, "blog_edicion/subir_apunte.html", {"form": form})
+
+
+# --- BUSCADOR ---
+
+
+def buscar_apuntes(request):
+    # 1. Empezamos trayendo TODOS los apuntes
+    apuntes = Apunte.objects.all()
+
+    # 2. Obtenemos los datos del filtro desde la URL
+    q = request.GET.get("q")
+    materia_id = request.GET.get("materia")
+    carrera_id = request.GET.get("carrera")
+
+    # 3. Aplicamos filtros solo si hay datos reales
+
+    # Filtro por palabra clave (título)
+    if q:
+        apuntes = apuntes.filter(titulo__icontains=q)
+
+    # Filtro por Materia
+    if materia_id and materia_id != "":
+        apuntes = apuntes.filter(materia_id=materia_id)
+
+    # Filtro por Carrera
+    if carrera_id and carrera_id != "":
+        # Asume que el modelo Materia tiene una relación con Carrera
+        apuntes = apuntes.filter(materia__carrera_id=carrera_id)
+
+    # 4. Cargamos las listas para los desplegables del formulario de búsqueda
+    materias = Materia.objects.all()
+    carreras = Carrera.objects.all()
+
+    context = {"apuntes": apuntes, "materias": materias, "carreras": carreras}
+    return render(request, "blog_edicion/buscar_apuntes.html", context)

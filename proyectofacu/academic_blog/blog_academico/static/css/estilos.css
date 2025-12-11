@@ -81,6 +81,25 @@ main#contenido {
   z-index: 5;
 }
 
+/* ==================================================== */
+/* === CORRECCIÓN DE LEGIBILIDAD GLOBAL (NUEVO) === */
+/* ==================================================== */
+/* Esto fuerza que los subtítulos y párrafos sueltos sean blancos */
+p,
+.lead,
+span,
+div {
+  color: inherit;
+  /* Hereda el color blanco del body o padre */
+}
+
+/* Fuerza bruta para secciones que se vean negras por error */
+section p,
+main p,
+header p {
+  color: var(--text);
+}
+
 
 /* ==================================================== */
 /* === ESTILOS TARJETAS (LOOK TECNOLÓGICO/SERIO) === */
@@ -91,6 +110,17 @@ main#contenido {
   background: transparent !important;
   border: 1px solid var(--panel) !important;
   /* Borde suave */
+  color: var(--text) !important;
+  /* Asegura que el texto base sea blanco */
+}
+
+/* === REGLA NUEVA: Forzar texto blanco en Títulos y Cuerpo de Cards === */
+.card-body,
+.card-title,
+.card-text,
+.card p,
+.card h5 {
+  color: var(--text) !important;
 }
 
 /* Base de borde y header sutil (Cian/Azul) */
@@ -125,6 +155,7 @@ main#contenido {
   background-color: transparent !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   /* Separadores sutiles */
+  color: var(--text) !important;
 }
 
 

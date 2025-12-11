@@ -20,19 +20,19 @@
 <div style="height: 350px;">
   <div class="text-center position-absolute w-100 start-0"
     style="top: 250px; transform: translateY(-50%); z-index: 100;">
-    <h1 class="display-4 fw-bold" style="color: #FFFFFF !important; text-shadow: 
+    <h1 class="display-4 fw-bold text-white" style="text-shadow: 
             -1px -1px 0 #000, 
              1px -1px 0 #000, 
             -1px 1px 0 #000, 
              1px 1px 0 #000, 
-             0 0 10px #000 !important; 
+             0 0 10px #000; 
             letter-spacing: 1px;">
       Bienvenidos
     </h1>
-    <p class="lead" style="color: #FFFFFF !important; text-shadow: 
+    <p class="lead text-white" style="text-shadow: 
             -1px -1px 0 #000, 
              1px -1px 0 #000, 
-             0 0 5px #000 !important;">Portal de la Tecnicatura
+             0 0 5px #000;">Portal de la Tecnicatura
       Universitaria en Programación - UTN FRLP</p>
   </div>
 </div>
@@ -53,7 +53,7 @@
           <div class="p-3">
             <ul class="list-group list-group-flush small">
               {% for evento in eventos %}
-              <li class="list-group-item bg-transparent" style="color: white !important;">
+              <li class="list-group-item bg-transparent text-white">
                 <strong class="text-info">{{ evento.fecha|date:"d/m" }}:</strong> {{ evento.titulo }}
               </li>
               {% empty %}
@@ -85,15 +85,15 @@
               </div>
               {% endif %}
               <div class="col-{% if articulo.imagen %}8{% else %}12{% endif %}">
-                <div class="card-body p-2">
+                <div class="card-body p-2 text-white">
                   <h6 class="card-title mb-1" style="font-size: 0.9rem; font-weight: bold;">
-                    <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}" class="text-decoration-none"
-                      style="color: white !important;">
+                    <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}"
+                      class="text-decoration-none text-white">
                       {{ articulo.titulo }}
                     </a>
                   </h6>
 
-                  <p class="card-text small mb-1" style="color: white !important;">
+                  <p class="card-text small mb-1 text-light">
                     {{ articulo.bajada|default:articulo.cuerpo|truncatewords:8 }}
                   </p>
 
@@ -117,7 +117,7 @@
           </div>
           <hr class="my-1 border-secondary">
           {% empty %}
-          <p class="text-center mt-4 fw-bold" style="color: white !important;">No hay novedades por ahora.</p>
+          <p class="text-center mt-4 fw-bold text-white">No hay novedades por ahora.</p>
           {% endfor %}
         </div>
 
@@ -138,7 +138,7 @@
 
           <div class="mb-3">
             <i class="fas fa-folder-open fa-3x text-info mb-3"></i>
-            <p class="card-text fw-medium" style="color: white !important;">
+            <p class="card-text fw-medium text-white">
               Accedé al repositorio de materiales de estudio, organizados por materia y carrera.
             </p>
           </div>
@@ -157,8 +157,7 @@
             <ul class="list-unstyled">
               {% for apunte in apuntes %}
               <li class="mb-2">
-                <a href="{{ apunte.archivo.url }}" class="text-decoration-none" style="color: white !important;"
-                  target="_blank">
+                <a href="{{ apunte.archivo.url }}" class="text-decoration-none text-white" target="_blank">
                   <strong>📄 {{ apunte.titulo }}</strong>
                   <span class="text-secondary">({{ apunte.materia.nombre }})</span>
                 </a>
