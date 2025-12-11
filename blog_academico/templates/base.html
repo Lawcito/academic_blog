@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>{% block title %}Blog Academico{% endblock %}</title>
-  <link rel="icon" type="image/png" href="{% static 'img/logoo.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/logo6.png' %}">
 
 
   {# Bootstrap CSS #}
@@ -21,10 +21,10 @@
 
   {# Header + Navbar Bootstrap #}
   <header class="border-bottom border-dark-subtle">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: hsla(221, 39%, 11%, 0.651); backdrop-filter: blur(8px);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #1282A2">
       <div class="container">
         <a class="navbar-brand d-inline-flex align-items-center" href="{% url 'home' %}">
-          <img src="{% static 'img/logo2.png' %}" alt="Imagen del blog" style="height:100px;width:auto;">
+          <img src="{% static 'img/logo7.png' %}" alt="Imagen del blog" style="height:70px;width:auto;">
           <span class="visually-hidden">Inicio</span>
         </a>
 
@@ -40,7 +40,7 @@
 
             {# --- HOME --- #}
             <li class="nav-item">
-              <a class="btn btn-danger w-100" href="{% url 'home' %}">INICIO</a>
+              <a class="btn btn-secondary w-100" href="{% url 'home' %}">INICIO</a>
             </li>
 
             {# --- Bloque que cada vista puede rellenar con su navegación propia --- #}
@@ -80,19 +80,40 @@
     </div>
   </main>
 
-  {# Footer #}
-  <footer class="mt-5 py-4 border-top border-dark-subtle bg-footer">
-    <div class="container small">
-      <address class="mb-1">
-        <strong>Contacto:</strong>
-        <a class="link-light text-decoration-underline" href="mailto:tup@frlp.utn.edu.ar">tup@frlp.utn.edu.ar</a> — 
-        Avenida 60 y Calle 124, Berisso, Provincia de Buenos Aires, República Argentina.
-      </address>
-      <div class="text-secondary">
-        HTML5 semántico, componentes Bootstrap y prácticas alineadas a W3C/WCAG AA.
+  <footer class="footer-uni mt-5 pt-4 pb-3">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Contacto -->
+      <div class="col-md-6">
+        <h6 class="fw-bold mb-2">Contacto</h6>
+        <address class="mb-1">
+          <a class="footer-link" href="mailto:contacto@uha.edu.ar">contacto@uha.edu.ar</a><br>
+          Avenida 123, Ciudad Universitaria, Provincia de Buenos Aires, Argentina.
+        </address>
       </div>
+
+      <!-- Equipo -->
+      <div class="col-md-6 text-md-end">
+        <h6 class="fw-bold mb-2">Equipo del Proyecto</h6>
+        <ul class="list-unstyled mb-0">
+          <li><a class="footer-link" href="https://lawcito.vercel.app/">Negrete Emir Alejo</a></li>
+          <li><a class="footer-link" href="https://coria-franco-nicolas.vercel.app/">Coria Franco Nicolas</a></li>
+          <li><a class="footer-link" href="https://github.com/ram333-ops">Galeano Ramon</a></li>
+          <li><a class="footer-link" href="https://github.com/norali84g-wq">Gorosito Norali</a></li>
+        </ul>
+      </div>
+
     </div>
-  </footer>
+
+    <hr class="mt-4 mb-3">
+
+    <div class="text-center small ">
+      © 2025 Universidad Horizonte Azul — Proyecto académico.  
+      HTML5 semántico + Bootstrap + buenas prácticas WCAG AA.
+    </div>
+  </div>
+</footer>
+
 
   {# Formulario oculto para Logout #}
   {% if user.is_authenticated %}

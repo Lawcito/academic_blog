@@ -1,5 +1,5 @@
 :root{
-  --bg: #041a4b;        /* fondo superior */
+  --bg: #2e59b8;        /* fondo superior */
   --panel: #0b1220;     /* panel oscuro de contenido */
   --text: #e5e7eb;      /* texto claro */
 }
@@ -96,5 +96,25 @@ a.link-light:visited{ color: #cbd5e1; }
 
 @media (prefers-reduced-motion: reduce){
   *{ animation: none !important; transition: none !important; }
+}
+
+.footer-uni {
+  background-color: #0A1128;
+  border-top: 2px solid #034078;
+}
+
+.footer-uni .footer-link {
+  color: #1282A2;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.footer-uni .footer-link:hover {
+  color: #FEFCFB;
+  text-decoration: underline;
+}
+.footer-uni hr {
+  border-color: #034078 !important;
+  opacity: 1 !important;
 }
 
