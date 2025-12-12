@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-panel p-4 rounded">
+    <h1>Nuevo debate</h1>
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Crear debate</button>
+    </form>
+</div>
+{% endblock %}

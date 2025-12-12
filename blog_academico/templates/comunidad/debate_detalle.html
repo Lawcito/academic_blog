@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-panel p-4 rounded">
+    <h1>{{ debate.titulo }}</h1>
+
+    <p class="text-secondary">
+        Creado por {{ debate.creado_por.username }} · {{ debate.fecha|date:"d/m/Y H:i" }}
+    </p>
+
+    <hr>
+
+    <h3>Mensajes</h3>
+    <ul class="list-unstyled mt-3">
+        {% for mensaje in mensajes %}
+            <li class="mb-2">
+                <strong>{{ mensaje.autor.username }}</strong>
+                <span class="text-secondary"> · {{ mensaje.fecha|date:"d/m/Y H:i" }}</span>
+                <p class="mb-1">{{ mensaje.texto }}</p>
+            </li>
+        {% empty %}
+            <li class="text-secondary">Sé el primero en comentar este debate.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h3>Agregar mensaje</h3>
+    <form method="post" class="mt-2">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+    </form>
+</div>
+{% endblock %}
+

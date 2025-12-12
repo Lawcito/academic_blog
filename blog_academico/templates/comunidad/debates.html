@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-panel p-4 rounded">
+    <h1>Debates entre estudiantes</h1>
+    <p class="text-secondary">Espacio para intercambiar dudas, tips y experiencias de cursada.</p>
+
+    <p class="mt-3">
+        <a href="{% url 'debate_nuevo' %}" class="btn btn-info btn-sm">Iniciar nuevo debate</a>
+    </p>
+
+    <ul class="list-unstyled mt-3">
+        {% for debate in debates %}
+            <li class="mb-2">
+                <a href="{% url 'debate_detalle' debate.pk %}">
+                    {{ debate.titulo }}
+                </a>
+                <span class="text-secondary"> · por {{ debate.creado_por.username }} · {{ debate.fecha|date:"d/m/Y H:i" }}</span>
+            </li>
+        {% empty %}
+            <li class="text-secondary">Todavía no hay debates creados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
