@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from blog_edicion.models import Articulo, Categoria
-
-# 👉 NUEVO: import de la app de comunidad
 from comunidad.models import Apunte, MaterialEstudio, Debate
 
 
@@ -12,6 +10,8 @@ def home(request):
     categorias = Categoria.objects.all()
     return render(request, "index.html", {'articulos': articulos, 'categorias': categorias})
 
+def landing_page(request):
+    return render(request, "landing.html")
 
 def registro(request):
     if request.method == 'POST':
@@ -23,7 +23,6 @@ def registro(request):
     else:
         form = UserCreationForm()
 
-    # Nuevo: traer datos reales para el panel derecho
     ultimos_apuntes = Apunte.objects.order_by('-fecha')[:3]
     ultimos_materiales = MaterialEstudio.objects.order_by('-fecha')[:3]
     ultimos_debates = Debate.objects.order_by('-fecha')[:3]

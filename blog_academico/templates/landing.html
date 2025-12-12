@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("{% static 'img/facultad.webp' %}") center/cover no-repeat;
+            backdrop-filter: blur(2px);
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px 60px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-enter {
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #0d6efd;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-enter:hover {
+            background: #084298;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <h1>Bienvenido a nuestro Blog Universitario</h1>
+    <p>Explorá artículos, proyectos y contenidos académicos.</p>
+    <p style="color: rgb(30, 144, 255);">Universidad Horizonte Azul</p>
+
+    <a href="{% url 'home' %}" class="btn-enter">Entrar al Blog</a>
+</div>
+
+</body>
+</html>
