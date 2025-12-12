@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "blog_edicion",
-    "widget_tweaks",
     "comunidad",  # 👉 NUEVO: registro de la app comunidad
 ]
 

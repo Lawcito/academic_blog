@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load widget_tweaks %}
 
 {% block content %}
 
@@ -17,12 +16,12 @@
 
     <div class="mb-3">
       <label class="form-label text-light">Nombre de usuario</label>
-      {{ form.username|add_class:"form-control login-input" }}
+      <input type="text" name="username" class="form-control login-input" id="id_username">
     </div>
 
     <div class="mb-3">
       <label class="form-label text-light">Contraseña</label>
-      {{ form.password|add_class:"form-control login-input" }}
+      <input type="password" name="password" class="form-control login-input" id="id_password">
     </div>
 
     <button type="submit" class="btn btn-primary w-100 mt-3">Ingresar</button>
