@@ -198,3 +198,24 @@ a.link-light:visited {
     transition: none !important;
   }
 }
+
+.footer-uni {
+  background-color: #0A1128;
+  border-top: 2px solid #034078;
+}
+
+.footer-uni .footer-link {
+  color: #1282A2;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.footer-uni .footer-link:hover {
+  color: #FEFCFB;
+  text-decoration: underline;
+}
+.footer-uni hr {
+  border-color: #034078 !important;
+  opacity: 1 !important;
+}
+
