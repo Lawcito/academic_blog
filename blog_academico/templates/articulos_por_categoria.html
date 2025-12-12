@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Artículos de {{ categoria.nombre }}{% endblock %}
+
+{% block content %}
+  <h1 class="text-center mb-4">Artículos en la categoría: {{ categoria.nombre }}</h1>
+
+  <div class="row">
+    {% for articulo in articulos %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          {% if articulo.imagen %}
+            <img src="{{ articulo.imagen.url }}" class="card-img-top" alt="{{ articulo.titulo }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ articulo.titulo }}</h5>
+            <p class="card-text">{{ articulo.contenido|truncatewords:20 }}</p>
+            <a href="{% url 'articulo_detalle' pk=articulo.pk %}" class="btn btn-primary">Leer más</a>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Publicado el {{ articulo.fecha_publicacion|date:"d/m/Y" }}</small>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No hay artículos en esta categoría.</p>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'home' %}" class="btn btn-secondary mt-4">Volver al inicio</a>
+{% endblock %}

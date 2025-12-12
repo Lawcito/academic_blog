@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-dark">🔍 Buscar Apuntes</h2>
+
+    <div class="card p-4 bg-light mb-4 shadow-sm border-info">
+        <form method="GET" class="row g-3">
+
+            <div class="col-12">
+                <label class="form-label fw-bold small text-secondary">Palabra clave:</label>
+                <input type="text" name="q" class="form-control"
+                    placeholder="Escribe el título del apunte (ej: Parcial)..." value="{{ request.GET.q|default:'' }}">
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label fw-bold small text-secondary">Carrera:</label>
+                <select name="carrera" class="form-select">
+                    <option value="">Todas las carreras</option>
+                    {% for c in carreras %}
+                    <option value="{{ c.id }}" {% if request.GET.carrera==c.id|stringformat:"s" %}selected{% endif %}>
+                        {{ c.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label fw-bold small text-secondary">Materia:</label>
+                <select name="materia" class="form-select">
+                    <option value="">Todas las materias</option>
+                    {% for m in materias %}
+                    <option value="{{ m.id }}" {% if request.GET.materia==m.id|stringformat:"s" %}selected{% endif %}>
+                        {{ m.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-info text-white w-100 fw-bold">Filtrar</button>
+            </div>
+
+            <div class="col-12 text-end mt-2">
+                <a href="{% url 'blog_edicion:buscar_apuntes' %}" class="text-secondary small text-decoration-none">
+                    ❌ Limpiar filtros
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        {% for apunte in apuntes %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm border-info">
+                <div class="card-body">
+                    <h5 class="card-title text-dark fw-bold">{{ apunte.titulo }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ apunte.materia.nombre }}</h6>
+                    <span class="badge bg-secondary mb-2">{{ apunte.get_tipo_display }}</span>
+
+                    <a href="{{ apunte.archivo.url }}" class="btn btn-outline-primary btn-sm mt-3 w-100"
+                        target="_blank">
+                        ⬇ Descargar
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="alert alert-warning d-inline-block">
+                No se encontraron apuntes con esos filtros.
+            </div>
+            <br>
+            <a href="{% url 'blog_edicion:buscar_apuntes' %}" class="btn btn-outline-dark mt-3">Ver todos los
+                apuntes</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
