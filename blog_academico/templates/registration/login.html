@@ -1,10 +1,28 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
-  <h2>Iniciar Sesión</h2>
-  <form method="post">
+
+<div class="login-card p-4 rounded-4 shadow-lg">
+
+  <h2 class="mb-4 text-light">Iniciar Sesión</h2>
+
+  <form method="post" class="login-form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+
+    <div class="mb-3">
+      <label class="form-label text-light">Nombre de usuario</label>
+      {{ form.username|add_class:"form-control login-input" }}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label text-light">Contraseña</label>
+      {{ form.password|add_class:"form-control login-input" }}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">Ingresar</button>
   </form>
+
+</div>
+
 {% endblock %}

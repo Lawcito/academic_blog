@@ -25,7 +25,7 @@
 
   {# Header + Navbar Bootstrap #}
   <header class="border-bottom border-dark-subtle">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #001F54">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #034078">
       <div class="container">
         <a class="navbar-brand d-inline-flex align-items-center" href="{% url 'home' %}">
           <img src="{% static 'img/logo10.png' %}" alt="Imagen del blog" style="height:70px;width:auto;">
@@ -44,7 +44,7 @@
 
             {# --- HOME --- #}
             <li class="nav-item">
-              <a class="btn btn-secondary w-100" href="{% url 'home' %}">INICIO</a>
+              <a class="btn btn-outline-primary w-100" href="{% url 'home' %}">INICIO</a>
             </li>
 
             {# --- Bloque que cada vista puede rellenar con su navegación propia --- #}
@@ -113,7 +113,7 @@
 
     <div class="text-center small ">
       © 2025 Universidad Horizonte Azul — Proyecto académico.  
-      HTML5 semántico + Bootstrap + buenas prácticas WCAG AA.
+      Django + Bootstrap 
     </div>
   </div>
 </footer>

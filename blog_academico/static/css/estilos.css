@@ -12,7 +12,7 @@ body {
 
 /* Fondo global y color de texto por defecto */
 body {
-  background: #0a1128;
+  background: #001F54;
   color: var(--text);
   overflow-x: hidden;
   width: 100%;
@@ -222,9 +222,6 @@ a.link-light:visited {
   border-color: #034078 !important;
   opacity: 1 !important;
 }
-/* =========================================================
-   SECCIÓN: Registro de usuario (auth)
-   ========================================================= */
 
 /* Layout general del bloque de registro */
 .auth-wrapper{
@@ -241,9 +238,32 @@ a.link-light:visited {
   gap: 2rem;
 }
 
-.auth-card{
-  flex: 1 1 380px;
+.auth-card {
+    position: relative;
+    overflow: hidden; /* asegura que el logo no se salga */
 }
+
+/* Fondo con el logo grande y sutil */
+.auth-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/static/img/logo6.png");
+    background-repeat: no-repeat;
+    background-size: 55%;
+    background-position: center;
+    opacity: 0.07;
+    z-index: 0;
+    filter: grayscale(100%);
+}
+
+
+/* Para que el contenido quede arriba del fondo */
+.auth-card > * {
+    position: relative;
+    z-index: 1;
+}
+
 
 .auth-aside{
   flex: 1 1 320px;
@@ -464,4 +484,21 @@ a.link-light:visited {
   border-color: #0e6580;
   color: #FEFCFB;
   transform: translateY(-2px);
+}
+.login-card {
+  background: #0A1128;        /* tu paleta */
+  border: 1px solid #034078; 
+}
+
+.login-input {
+  background: #001F54;
+  border: 1px solid #034078;
+  color: white;
+}
+
+.login-input:focus {
+  background: #001F54;
+  color: white;
+  border-color: #1282A2;
+  box-shadow: 0 0 10px #1282A2;
 }
