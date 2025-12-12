@@ -1,21 +1,59 @@
 {% extends "base.html" %}
 
+{% block title %}Publicar Material{% endblock %}
+
 {% block content %}
-  <h2>Crear Nuevo Artículo</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="mb-3">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: #6c757d">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <div style="color: red;">{{ error }}</div>
-        {% endfor %}
+<div class="row justify-content-center my-5">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow border-0">
+
+     <div class="card-header bg-mi-color text-center py-3">
+       <h4 class="mb-0">Publicar Nuevo Articulo</h4>
       </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Guardar Artículo</button>
-  </form>
+      <div class="card-body p-4">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label fw-bold">{{ field.label }}</label>
+
+            {{ field }}
+
+            {% if field.name == 'cuerpo' %}
+            <div class="alert alert-warning mt-2 p-2 small">
+              <i class="fas fa-lightbulb"></i> <strong>Tip para enlaces:</strong>
+              Si quieres poner un link a otra página, escribe este código:<br>
+              <code>&lt;a href="https://google.com" target="_blank"&gt;Texto del enlace&lt;/a&gt;</code>
+            </div>
+            {% endif %}
+
+            {% if field.name == 'imagen' %}
+            <div class="form-text text-dark"> Sube el flyer o imagen principal del evento (Formatos: jpg, png).
+            </div>
+            {% endif %}
+
+            {% if field.errors %}
+            <div class="text-danger small mt-1">
+              {{ field.errors }}
+            </div>
+            {% endif %}
+
+          </div>
+          {% endfor %}
+
+          <div class="d-grid gap-2 mt-4">
+           <button type="submit" class="btn btn-mi-color btn-lg">
+              Publicar Ahora
+            </button>
+
+            <a href="{% url 'blog_edicion:lista_articulos' %}" class="btn btn-secondary">
+              Cancelar
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

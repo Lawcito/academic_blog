@@ -445,3 +445,23 @@ a.link-light:visited {
   font-size: .8rem;
   text-align: center;
 }
+
+
+.bg-mi-color {
+  background-color: #1282A2 !important;
+  color: #FEFCFB !important;
+}
+
+.btn-mi-color {
+  background-color: #1282A2;
+  border-color: #1282A2;
+  color: #FEFCFB;
+  transition: all 0.3s ease;
+}
+
+.btn-mi-color:hover {
+  background-color: #0e6580; 
+  border-color: #0e6580;
+  color: #FEFCFB;
+  transform: translateY(-2px);
+}
