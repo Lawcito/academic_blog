@@ -11,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ux^p-805w=re1$5em_cn7hp^j94+mozl0_*zz@v_gpl&a30kq^"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -25,8 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog_edicion",
-    "comunidad",  # 👉 NUEVO: registro de la app comunidad
+    "blog_edicion"
 ]
 
 MIDDLEWARE = [
@@ -55,12 +54,7 @@ TEMPLATES = [
         },
     },
 ]
-STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
- 
 WSGI_APPLICATION = "blog_academico.wsgi.application"
 
 
@@ -110,12 +104,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -126,7 +115,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Redirecciones de Login y Logout
-LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
