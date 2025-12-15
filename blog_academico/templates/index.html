@@ -4,41 +4,25 @@
 {% block title %}Inicio - Aula Abierta{% endblock %}
 
 {% block content %}
+
 <h1 class="text-center mb-4">Bienvenido!</h1>
 <h2 class="text-center mb-4">Artículos más recientes</h2>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
 
-  <button class="btn btn-primary d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas"
-    data-bs-target="#sidebarFiltros" aria-controls="sidebarFiltros">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-      viewBox="0 0 16 16">
-      <path
-        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-    </svg>
+  <button class="btn btn-primary d-flex align-items-center gap-2" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#sidebarFiltros">
     Buscar y Filtrar
   </button>
 
-  <div class="d-none d-md-flex btn-group" role="group" aria-label="Modo de vista">
-    <button type="button" class="btn btn-outline-secondary active d-flex align-items-center justify-content-center"
-      id="btn-grilla" onclick="cambiarVista('grilla')">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid-fill"
-        viewBox="0 0 16 16">
-        <path
-          d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z" />
-      </svg>
+  <div class="d-none d-md-flex btn-group">
+    <button type="button" class="btn btn-outline-secondary active"
+            id="btn-grilla" onclick="cambiarVista('grilla')">
+      Grilla
     </button>
-    <button type="button" class="btn btn-outline-secondary d-flex align-items-center justify-content-center"
-      id="btn-lista" onclick="cambiarVista('lista')">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task"
-        viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z" />
-        <path
-          d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z" />
-        <path fill-rule="evenodd"
-          d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z" />
-      </svg>
+    <button type="button" class="btn btn-outline-secondary"
+            id="btn-lista" onclick="cambiarVista('lista')">
+      Lista
     </button>
   </div>
 </div>
@@ -52,27 +36,28 @@
 
         {% if articulo.imagen_static %}
         <div class="flex-shrink-0">
-          <img src="{% static 'img/articulos/'|add:articulo.imagen_static %}" alt="{{ articulo.titulo }}"
-            class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
+          <img src="{% static 'img/articulos/'|add:articulo.imagen_static %}"
+               alt="{{ articulo.titulo }}"
+               class="rounded"
+               style="width:80px;height:80px;object-fit:cover;">
         </div>
         {% endif %}
 
-
         <div class="flex-grow-1 ms-3">
-          <h5 class="card-title h6 fw-bold mb-1">{{ articulo.titulo }}</h5>
-
-          <p class="card-text small text-muted mb-2">
+          <h5 class="fw-bold mb-1">{{ articulo.titulo }}</h5>
+          <p class="small text-muted mb-2">
             {{ articulo.contenido|truncatewords:10 }}
           </p>
-
-          <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}" class="btn btn-outline-primary btn-sm py-0"
-            style="font-size: 0.8rem;">Leer más</a>
+          <a href="{% url 'blog_edicion:articulo_detalle' pk=articulo.pk %}"
+             class="btn btn-outline-primary btn-sm">
+            Leer más
+          </a>
         </div>
 
       </div>
 
-      <div class="card-footer bg-transparent border-top-0 pt-0 text-end">
-        <small class="text-muted" style="font-size: 0.75rem;">
+      <div class="card-footer bg-transparent text-end">
+        <small class="text-muted">
           {{ articulo.fecha_publicacion|date:"d/m/Y" }}
         </small>
       </div>
@@ -80,139 +65,58 @@
 
   </div>
   {% empty %}
-  <p class="text-center">No hay artículos para mostrar.</p>
+    <p class="text-center">No hay artículos para mostrar.</p>
   {% endfor %}
 </div>
-{% block scripts %}
-<script>
-  function cambiarVista(modo) {
-    const columnas = document.querySelectorAll('.articulo-col');
-    const btnGrilla = document.getElementById('btn-grilla');
-    const btnLista = document.getElementById('btn-lista');
 
-    if (modo === 'lista') {
-      columnas.forEach(col => {
-        col.classList.remove('col-md-6', 'col-lg-6');
-        col.classList.add('col-12');
-      });
-
-      btnLista.classList.add('active', 'btn-primary');
-      btnLista.classList.remove('btn-outline-secondary');
-      btnGrilla.classList.remove('active', 'btn-primary');
-      btnGrilla.classList.add('btn-outline-secondary');
-
-      localStorage.setItem('preferenciaVista', 'lista');
-
-    } else {
-      columnas.forEach(col => {
-        col.classList.remove('col-12');
-        col.classList.add('col-md-6', 'col-lg-6');
-      });
-
-      btnGrilla.classList.add('active', 'btn-primary');
-      btnGrilla.classList.remove('btn-outline-secondary');
-      btnLista.classList.remove('active', 'btn-primary');
-      btnLista.classList.add('btn-outline-secondary');
-
-      localStorage.setItem('preferenciaVista', 'grilla');
-    }
-  }
-
-  // Cargar preferencia al inicio
-  document.addEventListener("DOMContentLoaded", function () {
-    const preferencia = localStorage.getItem('preferenciaVista');
-    if (preferencia === 'lista') {
-      cambiarVista('lista');
-    }
-  });
-</script>
-{% endblock %}
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarFiltros" aria-labelledby="sidebarFiltrosLabel"
-  style="background-color: var(--panel); color: var(--text);">
-
-  <div class="offcanvas-header border-bottom border-secondary">
-    <h5 class="offcanvas-title" id="sidebarFiltrosLabel">Explorar Artículos</h5>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<!-- OFFCANVAS -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarFiltros">
+  <div class="offcanvas-header">
+    <h5>Explorar artículos</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
 
   <div class="offcanvas-body">
+    <form method="get">
+      <div class="mb-3">
+        <input type="text" name="q" class="form-control"
+               placeholder="Buscar..."
+               value="{{ request.GET.q|default:'' }}">
+      </div>
 
-    {% if request.GET.q or request.GET.categoria %}
-    <div class="mb-4 pb-3 border-bottom border-secondary">
-      <label class="form-label fw-bold text-info mb-2 small text-uppercase">Filtros aplicados</label>
-      <div class="d-flex flex-wrap gap-2">
-
-        {% if request.GET.q %}
-        <div class="badge bg-soft-info text-info border border-info d-flex align-items-center gap-2 p-2">
-          <span><i class="bi bi-search me-1"></i> "{{ request.GET.q }}"</span>
-          <a href="{% url 'blog_edicion:lista_articulos' %}?categoria={{ request.GET.categoria }}"
-            class="text-info text-decoration-none" aria-label="Quitar filtro de texto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </a>
-        </div>
-        {% endif %}
-
-        {% if request.GET.categoria %}
+      <div class="mb-3">
         {% for cat in categorias %}
-        {% if request.GET.categoria == cat.id|stringformat:"s" %}
-        <div class="badge bg-soft-info text-info border border-info d-flex align-items-center gap-2 p-2">
-          <span><i class="bi bi-folder me-1"></i> {{ cat.nombre }}</span>
-          <a href="{% url 'blog_edicion:lista_articulos' %}?q={{ request.GET.q }}"
-            class="text-info text-decoration-none" aria-label="Quitar filtro de categoría">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </a>
-        </div>
-        {% endif %}
+        <button class="btn btn-outline-secondary w-100 mb-1"
+                name="categoria" value="{{ cat.id }}">
+          {{ cat.nombre }}
+        </button>
         {% endfor %}
-        {% endif %}
-
-      </div>
-    </div>
-    {% endif %}
-
-    <form action="{% url 'blog_edicion:lista_articulos' %}" method="get">
-
-      <div class="mb-4">
-        <label class="form-label fw-bold text-info">Buscar</label>
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Palabra clave..."
-            value="{{ request.GET.q|default:'' }}">
-          <button class="btn btn-outline-info" type="submit">Ir</button>
-        </div>
       </div>
 
-      <div class="mb-4">
-        <label class="form-label fw-bold text-info">Categorías</label>
-        <div class="list-group list-group-flush rounded">
-
-          <a href="{% url 'blog_edicion:lista_articulos' %}?q={{ request.GET.q }}"
-            class="list-group-item list-group-item-action bg-transparent text-light border-secondary {% if not request.GET.categoria %}active{% endif %}">
-            Todas las categorías
-          </a>
-
-          {% for cat in categorias %}
-          <button type="submit" name="categoria" value="{{ cat.id }}" class="list-group-item list-group-item-action bg-transparent text-light border-secondary d-flex justify-content-between align-items-center 
-                {% if request.GET.categoria == cat.id|stringformat:'s' %}active bg-info border-info{% endif %}">
-            {{ cat.nombre }}
-          </button>
-          {% endfor %}
-        </div>
-      </div>
-
-      <hr class="border-secondary">
-
-      <a href="{% url 'blog_edicion:lista_articulos' %}" class="btn btn-danger w-100">
-        Limpiar todos los filtros
+      <a href="{% url 'home' %}" class="btn btn-danger w-100">
+        Limpiar filtros
       </a>
-
     </form>
   </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function cambiarVista(modo) {
+  const cols = document.querySelectorAll('.articulo-col');
+  if (modo === 'lista') {
+    cols.forEach(c => {
+      c.classList.remove('col-md-6','col-lg-6');
+      c.classList.add('col-12');
+    });
+  } else {
+    cols.forEach(c => {
+      c.classList.remove('col-12');
+      c.classList.add('col-md-6','col-lg-6');
+    });
+  }
+}
+</script>
 {% endblock %}
