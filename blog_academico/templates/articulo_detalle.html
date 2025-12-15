@@ -23,6 +23,7 @@
     <a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
     {% if user == articulo.autor %}
       <a href="{% url 'blog_edicion:editar_articulo' pk=articulo.pk %}" class="btn btn-primary">Editar Artículo</a>
+      <a href="{% url 'blog_edicion:eliminar_articulo' pk=articulo.pk %}" class="btn btn-danger">Eliminar Artículo</a>
     {% endif %}
   </div>
 {% endblock %}

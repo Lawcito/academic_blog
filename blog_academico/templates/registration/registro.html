@@ -57,19 +57,6 @@
             <div class="aside-section">
                 <h3>Apuntes de materias</h3>
                 <p class="aside-text">Subí y consultá apuntes organizados por materia y tema.</p>
-
-                <ul class="aside-list">
-                    {% for apunte in ultimos_apuntes %}
-                        <li>
-                            <strong>{{ apunte.titulo }}</strong>
-                            <span class="aside-item-meta">· {{ apunte.materia.nombre }}</span>
-                        </li>
-                    {% empty %}
-                        <li class="aside-empty">Todavía no hay apuntes cargados.</li>
-                    {% endfor %}
-                </ul>
-
-                <a href="{% url 'apuntes_lista' %}" class="aside-link">Ver todos los apuntes</a>
             </div>
 
             <!-- MATERIAL -->
@@ -77,39 +64,13 @@
                 <h3>Material de estudio</h3>
                 <p class="aside-text">Textos, guías y recursos utilizados en cada cursada.</p>
 
-                <ul class="aside-list">
-                    {% for material in ultimos_materiales %}
-                        <li>
-                            <strong>{{ material.titulo }}</strong>
-                            <span class="aside-item-meta">· {{ material.materia.nombre }}</span>
-                        </li>
-                    {% empty %}
-                        <li class="aside-empty">Sin material cargado por el momento.</li>
-                    {% endfor %}
-                </ul>
-
-                <a href="{% url 'materiales_lista' %}" class="aside-link">Ver material de estudio</a>
-            </div>
+              
 
             <!-- DEBATES -->
             <div class="aside-section">
                 <h3>Debates con tus compañeros</h3>
                 <p class="aside-text">Comentá dudas, compartí tips y experiencias de cursada.</p>
 
-                <ul class="aside-list">
-                    {% for debate in ultimos_debates %}
-                        <li>
-                            <a href="{% url 'debate_detalle' debate.pk %}">
-                                {{ debate.titulo }}
-                                <span class="aside-item-meta">· {{ debate.materia.nombre }}</span>
-                            </a>
-                        </li>
-                    {% empty %}
-                        <li class="aside-empty">Todavía no hay debates abiertos.</li>
-                    {% endfor %}
-                </ul>
-
-                <a href="{% url 'debates_lista' %}" class="aside-link">Ver todos los debates</a>
             </div>
 
             <p class="aside-footer">

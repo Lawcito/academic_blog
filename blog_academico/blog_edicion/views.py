@@ -71,3 +71,14 @@ def articulos_por_categoria(request, pk):
         "articulos_por_categoria.html",
         {"categoria": categoria, "articulos": articulos},
     )
+
+
+@login_required
+def eliminar_articulo(request, pk):
+    articulo = get_object_or_404(Articulo, pk=pk)
+    if articulo.autor != request.user:
+        return HttpResponseForbidden(
+            "No tienes permiso para eliminar este artículo."
+        )
+    articulo.delete()
+    return redirect("home")
