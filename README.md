@@ -39,9 +39,11 @@ python manage.py runserver
 ```
 # 👥 Integrantes
 
-Negrete Emir Alejo
-Coria Franco Nicolas
-Galeano Ramon de Jesús
-Gorosito Norali
+| Nombre | Función |
+| :--- | :--- |
+| **Negrete Emir Alejo** | ... |
+| **Coria Franco Nicolas** | ... |
+| **Galeano Ramón de Jesús** | ... |
+| **Gorosito Norali** | ... |
 
 # Estado: En Desarrollo 🟡
