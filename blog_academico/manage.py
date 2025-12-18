@@ -7,8 +7,8 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault(
-    'DJANGO_SETTINGS_MODULE',
-    'blog_academico.settings'
+    "DJANGO_SETTINGS_MODULE",
+    "blog_academico.settings"
 )
 
 
