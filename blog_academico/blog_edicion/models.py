@@ -14,17 +14,17 @@ class Articulo(models.Model):
     contenido = models.TextField()
     fecha_publicacion = models.DateTimeField(default=timezone.now)
 
-    imagen_static = models.CharField(
-        max_length=100,
+    imagen = models.ImageField(
+        upload_to="articulos/",
         blank=True,
-        help_text="Nombre del archivo en static/img/articulos/"
+        null=True
     )
 
     categoria = models.ForeignKey(
         Categoria,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='articulos'
+        related_name="articulos"
     )
 
     autor = models.ForeignKey(
@@ -36,6 +36,3 @@ class Articulo(models.Model):
 
     def __str__(self):
         return self.titulo
-
-    class Meta:
-        ordering = ['-fecha_publicacion']

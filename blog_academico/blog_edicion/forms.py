@@ -4,15 +4,4 @@ from .models import Articulo
 class ArticuloForm(forms.ModelForm):
     class Meta:
         model = Articulo
-        fields = ['titulo', 'contenido', 'imagen_static', 'categoria']
-        widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
-            'contenido': forms.Textarea(attrs={'class': 'form-control'}),
-            'categoria': forms.Select(attrs={'class': 'form-select'}),
-            'imagen_static': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'ej: torneo.png'
-                }
-            ),
-        }
+        fields = ["titulo", "contenido", "imagen", "categoria"]
