@@ -41,9 +41,9 @@ python manage.py runserver
 
 | Nombre | Función |
 | :--- | :--- |
-| **Negrete Emir Alejo** | .a.. |
-| **Coria Franco Nicolas** | ... |
-| **Galeano Ramón de Jesús** | ... |
-| **Gorosito Norali** | ... |
+| **Negrete Emir Alejo** | Creación de las funciones y estilos del inicio de la app, inclusión de la búsqueda de blogs. |
+| **Coria Franco Nicolas** | Creación de las funciones y estilos del login de la app junto con la edición y funcionalidad del navbar. |
+| **Galeano Ramón de Jesús** | Creación de las funciones y estilos del registro de la app. |
+| **Gorosito Norali** | Creación de las funciones y estilos de los articulos de la app. |
 
 # Estado: En Desarrollo 🟡
