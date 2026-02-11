@@ -41,7 +41,7 @@ python manage.py runserver
 
 | Nombre | Función |
 | :--- | :--- |
-| **Negrete Emir Alejo** | ... |
+| **Negrete Emir Alejo** | .a.. |
 | **Coria Franco Nicolas** | ... |
 | **Galeano Ramón de Jesús** | ... |
 | **Gorosito Norali** | ... |
